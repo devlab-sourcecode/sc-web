@@ -125,7 +125,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
 }
 
@@ -186,4 +186,29 @@
 
 html {
   font-size: var(--font-size);
+}
+
+/* Simple navigation styles */
+[data-name="Navigation"] p {
+  cursor: pointer;
+}
+
+[data-name="Navigation"] p:hover {
+  opacity: 0.8;
+}
+
+[data-name="Frame 352"] {
+  cursor: pointer;
+}
+
+[data-name="Frame 352"]:hover {
+  opacity: 0.8;
+}
+
+[id="Frame 352"] {
+  cursor: pointer;
+}
+
+[id="Frame 352"]:hover {
+  opacity: 0.8;
 }
