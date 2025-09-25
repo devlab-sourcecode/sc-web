@@ -1,6 +1,5 @@
 import svgPaths from "./svg-6xc7n64g64";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { useIsMobile } from "../components/ui/use-mobile";
 import { getLogoSetColumns, getLogoSetNames } from "../assets/logo/sets";
 import { Footer } from "./footer";
 import { useNavigate } from "react-router-dom";
@@ -50,11 +49,11 @@ import Ellipse74 from "../assets/Ellipse 74.png";
 import MenuNav, { Navigation as TopNavigation } from "./meun";
 import imgImagePlaceholder4 from "../assets/40a7b7c2aa72b445c84e6179f4afa8c36c1c3330.jpg";
 import imgImagePlaceholder5 from "../assets/49b253b96b9760cf5eca29fb46709696b7b9332c.png";
-import { imgWireframeVector } from "./svg-9rxtm";
+// Removed unused imgWireframeVector import
+
+import imgHeroBackground from "../assets/home/Background.png";
 
 function WireframeVector() {
-  const isMobile = useIsMobile();
-  if (isMobile) return null;
   return (
     <div className="h-[2169.89px] opacity-25 overflow-clip relative w-[2977.92px]" data-name="Wireframe Vector">
       <div className="absolute flex inset-[14.19%_28.42%_40.14%_18.14%] items-center justify-center">
@@ -225,40 +224,12 @@ function Frame2121450975() {
   );
 }
 
-function WireframeVector1() {
-  const isMobile = useIsMobile();
-  if (isMobile) return null;
-  return (
-    <div className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[1139.87px_679.943px] mask-size-[864.974px_450.371px] relative size-full pointer-events-none" data-name="Wireframe Vector" style={{ maskImage: `url('${imgWireframeVector}')` }}>
-      <svg className="block size-full pointer-events-none" fill="none" preserveAspectRatio="none" viewBox="0 0 2651 1057">
-        <g id="Wireframe Vector" opacity="0.25">
-          <path d={svgPaths.p1a2e4a00} id="Vector" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-          <path d={svgPaths.p230b8b80} id="Vector_2" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-          <path d={svgPaths.pa63fb40} id="Vector_3" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-          <path d={svgPaths.p3919e600} id="Vector_4" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-          <path d={svgPaths.p28da9000} id="Vector_5" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-          <path d={svgPaths.p31862e00} id="Vector_6" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-          <path d={svgPaths.p4d7a180} id="Vector_7" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-          <path d={svgPaths.p2999ab80} id="Vector_8" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-          <path d={svgPaths.p3b4773c0} id="Vector_9" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-          <path d={svgPaths.p2d64a300} id="Vector_10" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
-        </g>
-      </svg>
-    </div>
-  );
-}
+// Removed unused WireframeVector1 component
 
 function Background() {
-  const isMobile = useIsMobile();
-  if (isMobile) return null;
   return (
     <div className="absolute contents inset-[9.65%_32.29%_84.99%_7.64%]" data-name="Background">
-      <div className="absolute bg-white inset-[9.65%_32.29%_84.99%_7.64%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[864.974px_450.371px] rounded-[34.644px]" data-name="Background" style={{ maskImage: `url('${imgWireframeVector}')` }} />
-      <div className="absolute flex inset-[1.57%_-24.42%_70.82%_-71.52%] items-center justify-center pointer-events-none">
-        <div className="flex-none h-[1056.82px] rotate-[146.611deg] scale-y-[-100%] skew-x-[358.248deg] w-[2650.69px] pointer-events-none">
-          <WireframeVector1 />
-        </div>
-      </div>
+      <img alt="" className="absolute inset-[9.65%_32.29%_84.99%_7.64%] rounded-[34.644px] pointer-events-none object-cover" src={imgHeroBackground} />
     </div>
   );
 }
@@ -500,8 +471,6 @@ function ProjectsSection() {
 }
 
 function WireframeVector2() {
-  const isMobile = useIsMobile();
-  if (isMobile) return null;
   return (
     <div className="h-[1725px] relative w-[3604px]" data-name="Wireframe Vector">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 3604 1725">
@@ -1620,10 +1589,9 @@ function ServicesSection() {
 }
 
 function Frame2121450982() {
-  const isMobile = useIsMobile();
-  const visibleCount = isMobile ? 1 : 3;
+  const visibleCount = 3;
   const cardWidthPx = 350; // width of each card component
-  const gapPx = isMobile ? 24 : 83; // reduce gap on mobile
+  const gapPx = 83; // reduce gap on mobile
 
   type TestimonialData = {
     title: string;
@@ -1707,7 +1675,7 @@ function Frame2121450982() {
   ));
 
   const baseLen = base.length;
-  const repeats = isMobile ? 6 : 20; // reduce repeats on mobile to cut DOM size
+  const repeats = 20; // reduce repeats on mobile to cut DOM size
   const totalLen = baseLen * repeats;
   const startIndex = baseLen * Math.floor(repeats / 2);
 

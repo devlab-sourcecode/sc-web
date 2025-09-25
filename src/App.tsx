@@ -81,21 +81,23 @@ function NavigationWrapper({ children }: { children?: ReactNode }) {
   return (
     <div className="min-h-screen w-full">
       <div className="relative mx-auto w-full max-w-[1440px] px-0 md:px-6 lg:px-8" onClick={handleClick}>
-        <ScaledCanvas baseWidth={1440}>{children}</ScaledCanvas>
+      {/* <ScaledCanvas baseWidth={1440}>{children}</        ScaledCanvas> */}
+
+        {children}
       </div>
     </div>
   );
 }
 
 // Scroll to top on route change
-function ScrollToTop() {
-  const location = useLocation();
-  useLayoutEffect(() => {
-    // เลื่อนขึ้นบนสุดทันที ให้ความรู้สึกเหมือน refresh
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
-  return null;
-}
+// function ScrollToTop() {
+//   const location = useLocation();
+//   useLayoutEffect(() => {
+//     // เลื่อนขึ้นบนสุดทันที ให้ความรู้สึกเหมือน refresh
+//     window.scrollTo(0, 0);
+//   }, [location.pathname]);
+//   return null;
+// }
 
 // Page components
 function HomePageLink() {
@@ -140,7 +142,7 @@ function AboutUsPageLink() {
 export default function App() {
   return (
     <Router>
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<HomePageLink />} />
