@@ -1,4 +1,6 @@
 import svgPaths from "./svg-z1ekvilmxr";
+import { Footer } from "./footer";
+
 import imgRectangle424 from "figma:asset/193ae0716c6de33d90aa240a158618ad65583eff.png";
 import imgWomanWheelchairDoingMaintenanceServerRoomInfrastructure1 from "figma:asset/f0643d3b8d1382269f226d33c02f94ccd2f5e8ef.png";
 import imgBackground from "figma:asset/852860408de8254621186898a68e4c7eb55d8760.png";
@@ -20,6 +22,7 @@ import imgImagePlaceholder from "figma:asset/34e5d66303e1a24493a7ba1e52f3d699654
 import imgImagePlaceholder1 from "figma:asset/f67d8728129ea6fc99e5dbc8963b90f6be3e841f.png";
 import imgImagePlaceholder2 from "figma:asset/561386bd65f14b81ac0bb8ff353f85aef864e68e.png";
 import imgImagePlaceholder3 from "figma:asset/13bbc3c799cad567f386b6ed571654e1c0f0130a.png";
+import MenuNav from "./meun";
 
 function WireframeVector() {
   return (
@@ -85,21 +88,7 @@ function Frame2121450971() {
 
 function Frame2121450969() {
   return (
-    <div className="content-stretch flex gap-[44px] items-center justify-end relative shrink-0 w-[899.817px]">
-      <Frame2121450971 />
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">Case Studies</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">News/Blog</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">About Us</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">Contact</p>
-      </div>
-    </div>
+    <MenuNav active="Our Services" />
   );
 }
 
@@ -1415,16 +1404,11 @@ function ScOurServicesDesktop() {
       <HeroSection />
       <ProjectsSection />
       <CtaSection />
-      <Frame2121450996 />
-      <div className="absolute font-['Poppins:Regular',_sans-serif] leading-[0] left-[74px] not-italic opacity-50 text-[16px] text-nowrap text-white top-[5046px]">
-        <p className="leading-[26px] whitespace-pre">© 2025 Sourcecode Co., Ltd. All rights reserved · Privacy Policy · Data Removal · Quality Policy</p>
-      </div>
-      <div className="absolute bg-white h-px left-[73px] opacity-50 top-[5023px] w-[1289px]" data-name="Line" />
+      <Footer baseTop={4564} withBackground={false} />
       <Group2085664658 />
       <Frame2121451009 />
       <Frame2121451005 />
-      <Frame2121451000 />
-      <Frame4646852 />
+      {/* footer moved to shared Footer component */}
     </div>
   );
 }

@@ -1,11 +1,307 @@
 import svgPaths from "./svg-lpde8ofs2o";
 import { Footer } from "./footer";
+import React, { createContext, useContext, useMemo, useState } from "react";
+import { toast } from "sonner";
+// @ts-ignore - figma virtual asset path is resolved by bundler
 import imgRectangle424 from "figma:asset/2ff818ecd92cfe4cd8b4220e0c6af2dec4d91b85.png";
+// @ts-ignore - figma virtual asset path is resolved by bundler
 import imgBackground from "figma:asset/852860408de8254621186898a68e4c7eb55d8760.png";
+// @ts-ignore - figma virtual asset path is resolved by bundler
 import imgImage3 from "figma:asset/3f7dd442982bed8cdbb235487ebc89687db03127.png";
+// @ts-ignore - figma virtual asset path is resolved by bundler
 import imgImage2 from "figma:asset/403877bb9ad756543babebce3aa9fcd8ad8efcd9.png";
+// @ts-ignore - figma virtual asset path is resolved by bundler
 import imgImagePlaceholder from "figma:asset/fad0cc69ce118d6709dd3595324ac258e59c2f39.png";
+// @ts-ignore - figma virtual asset path is resolved by bundler
 import imgMapImage from "figma:asset/3a8b8a7d2dac090ff0ac2aaf5760732acab67c7f.png";
+import MenuNav from "./meun";
+
+type ContactFormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  companyName: string;
+  estimatedBudget: string;
+  hearAbout: string;
+  message: string;
+};
+
+type ContactFormContext = {
+  values: ContactFormValues;
+  errors: Partial<Record<keyof ContactFormValues, string>>;
+  setValue: (field: keyof ContactFormValues, value: string) => void;
+  handleSubmit: (e?: React.FormEvent) => Promise<void>;
+  isSubmitting: boolean;
+  submitted: boolean;
+  apiError: string | null;
+};
+
+const FormContext = createContext<ContactFormContext | null>(null);
+
+function useContactForm() {
+  const ctx = useContext(FormContext);
+  if (!ctx) throw new Error("Contact form context missing");
+  return ctx;
+}
+
+function ContactFormProvider({ children }: { children?: React.ReactNode }) {
+  const initialValues: ContactFormValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    companyName: "",
+    estimatedBudget: "",
+    hearAbout: "",
+    message: "",
+  };
+  const [values, setValues] = useState<ContactFormValues>(initialValues);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
+
+  const getErrors = (v: ContactFormValues) => {
+    const errs: Partial<Record<keyof ContactFormValues, string>> = {};
+    if (!v.firstName.trim()) errs.firstName = "กรุณากรอกชื่อ";
+    if (!v.lastName.trim()) errs.lastName = "กรุณากรอกนามสกุล";
+    if (!v.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)) errs.email = "อีเมลไม่ถูกต้อง";
+    const digits = v.phone.replace(/\D/g, "");
+    if (!digits || digits.length < 9) errs.phone = "กรุณากรอกเบอร์ให้ครบ";
+    if (!v.companyName.trim()) errs.companyName = "กรุณากรอกชื่อบริษัท";
+    if (!v.estimatedBudget.trim() || isNaN(Number(v.estimatedBudget))) errs.estimatedBudget = "งบประมาณต้องเป็นตัวเลข";
+    if (!v.hearAbout.trim()) errs.hearAbout = "กรุณาเลือกตัวเลือก";
+    // Message เป็น optional ไม่บังคับกรอก
+    return errs;
+  };
+
+  const errors = useMemo(() => getErrors(values), [values]);
+
+  const setValue = (field: keyof ContactFormValues, value: string) => {
+    setValues((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e?: React.FormEvent) => {
+    console.log("handleSubmit", e);
+    console.log("handleSubmit", values);
+
+    if (e) e.preventDefault();
+    setSubmitted(false);
+    setApiError(null);
+    const errs = getErrors(values);
+    console.log("errs" , errs);
+
+    if (Object.keys(errs).length > 0) {
+      toast.error("กรุณากรอกข้อมูลให้ครบถ้วน");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const tableRows = [
+        ["First Name", values.firstName],
+        ["Last Name", values.lastName],
+        ["Email", values.email],
+        ["Phone", `+66 ${values.phone}`],
+        ["Company Name", values.companyName],
+        ["Estimated Budget", values.estimatedBudget],
+        ["How did you hear about us?", values.hearAbout],
+        ["Message", values.message.replace(/\n/g, "<br/>")],
+      ]
+        .map(
+          ([k, v]) =>
+            `<tr><td style="padding:8px;border:1px solid #e5e7eb;background:#f9fafb;width:250px;"><b>${k}</b></td><td style="padding:8px;border:1px solid #e5e7eb;width:500px;">${v}</td></tr>`
+        )
+        .join("");
+
+      const html = `
+        <div style="font-family:Inter,Arial,sans-serif;color:#111827;">
+          <h3 style="margin:0 0 12px;color:#11112b;">New Lead from SC Website</h3>
+          <table style="border-collapse:collapse;width:100%;font-size:14px;">${tableRows}</table>
+        </div>
+      `;
+
+      const payload = {
+        header: {
+          from: "Smart RMS <do_not_reply@smartzoneonline.com>",
+          to: "sc.watsaruta@gmail.com",//support@sourcecode.co.th
+          cc: null,
+          subject: "New Lead from SC Website",
+          signature: "",
+        },
+        body: {
+          combo: [
+            {
+              html,
+            },
+          ],
+        },
+      };
+      console.log("fetch");
+
+      await fetch("http://server6.sourcecode.co.th:3014/api/notification/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      setSubmitted(true);
+      setValues(initialValues);
+      toast.success("ส่งข้อมูลเรียบร้อย ขอบคุณครับ");
+    } catch (err: any) {
+      setApiError(err?.message ?? "ส่งอีเมลไม่สำเร็จ");
+      toast.error(err?.message ?? "ส่งอีเมลไม่สำเร็จ");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const value: ContactFormContext = {
+    values,
+    errors,
+    setValue,
+    handleSubmit,
+    isSubmitting,
+    submitted,
+    apiError,
+  };
+
+  return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
+}
+
+function useFieldBorder(_hasError: boolean): React.CSSProperties | undefined {
+  // ไม่ต้องการแสดงเส้นขอบเมื่อ invalid เพื่อคงความสวยงามตามดีไซน์
+  return undefined;
+}
+
+function FirstNameInput() {
+  const { values, setValue, errors } = useContactForm();
+  return (
+    <input
+      value={values.firstName}
+      onChange={(e) => setValue("firstName", e.target.value)}
+      placeholder="First Name"
+      aria-invalid={!!errors.firstName}
+      className="w-full h-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none font-['Poppins:Regular',_sans-serif] text-[16px] text-[#11112b] placeholder-opacity-50"
+      style={useFieldBorder(!!errors.firstName)}
+    />
+  );
+}
+
+function LastNameInput() {
+  const { values, setValue, errors } = useContactForm();
+  return (
+    <input
+      value={values.lastName}
+      onChange={(e) => setValue("lastName", e.target.value)}
+      placeholder="Last Name"
+      aria-invalid={!!errors.lastName}
+      className="w-full h-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none font-['Poppins:Regular',_sans-serif] text-[16px] text-[#11112b] placeholder-opacity-50"
+      style={useFieldBorder(!!errors.lastName)}
+    />
+  );
+}
+
+function EmailInput() {
+  const { values, setValue, errors } = useContactForm();
+  return (
+    <input
+      type="email"
+      value={values.email}
+      onChange={(e) => setValue("email", e.target.value)}
+      placeholder="Example@email.com"
+      aria-invalid={!!errors.email}
+      className="w-full h-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none font-['Poppins:Regular',_sans-serif] text-[16px] text-[#11112b] placeholder-opacity-50"
+      style={useFieldBorder(!!errors.email)}
+    />
+  );
+}
+
+function PhoneInput() {
+  const { values, setValue, errors } = useContactForm();
+  const digits = values.phone.replace(/\D/g, "").slice(0, 9);
+  const display = digits
+    .replace(/(\d{2})(\d{0,3})(\d{0,4}).*/, (m, a, b, c) => [a, b && `-${b}`, c && `-${c}`].filter(Boolean).join(""));
+  return (
+    <input
+      inputMode="numeric"
+      pattern="[0-9\-]*"
+      value={display}
+      onChange={(e) => setValue("phone", e.target.value.replace(/\D/g, "").slice(0, 9))}
+      placeholder="00-000-0000"
+      aria-invalid={!!errors.phone}
+      className="grow h-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none font-['Poppins:Regular',_sans-serif] text-[16px] text-[#11112b] placeholder-opacity-50"
+      style={useFieldBorder(!!errors.phone)}
+    />
+  );
+}
+
+function CompanyInput() {
+  const { values, setValue, errors } = useContactForm();
+  return (
+    <input
+      value={values.companyName}
+      onChange={(e) => setValue("companyName", e.target.value)}
+      placeholder="Company Name"
+      aria-invalid={!!errors.companyName}
+      className="w-full h-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none font-['Poppins:Regular',_sans-serif] text-[16px] text-[#11112b] placeholder-opacity-50"
+      style={useFieldBorder(!!errors.companyName)}
+    />
+  );
+}
+
+function BudgetInput() {
+  const { values, setValue, errors } = useContactForm();
+  const digits = values.estimatedBudget.replace(/\D/g, "");
+  const display = digits.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return (
+    <input
+      inputMode="numeric"
+      pattern="[0-9,]*"
+      value={display}
+      onChange={(e) => setValue("estimatedBudget", e.target.value.replace(/\D/g, ""))}
+      placeholder="e.g 50,000"
+      aria-invalid={!!errors.estimatedBudget}
+      className="w-full h-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none font-['Poppins:Regular',_sans-serif] text-[16px] text-[#11112b] placeholder-opacity-50"
+      style={useFieldBorder(!!errors.estimatedBudget)}
+    />
+  );
+}
+
+function HearAboutSelect() {
+  const { values, setValue, errors } = useContactForm();
+  return (
+    <select
+      value={values.hearAbout}
+      onChange={(e) => setValue("hearAbout", e.target.value)}
+      aria-invalid={!!errors.hearAbout}
+      className="w-full h-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none font-['Poppins:Regular',_sans-serif] text-[16px] text-[#11112b]"
+      style={useFieldBorder(!!errors.hearAbout)}
+    >
+      <option value="" disabled>
+        Select an option
+      </option>
+      <option value="Google">Google</option>
+      <option value="Facebook">Facebook</option>
+      <option value="Referral">Referral</option>
+      <option value="Event">Event</option>
+      <option value="Other">Other</option>
+    </select>
+  );
+}
+
+function MessageTextarea() {
+  const { values, setValue, errors } = useContactForm();
+  return (
+    <textarea
+      value={values.message}
+      onChange={(e) => setValue("message", e.target.value)}
+      placeholder="Enter Your Message ..."
+      aria-invalid={!!errors.message}
+      className="w-full h-full outline-none focus:outline-none focus:ring-0 focus-visible:outline-none font-['Poppins:Regular',_sans-serif] text-[16px] text-[#11112b] placeholder-opacity-50 leading-[normal] bg-transparent"
+      style={{ ...useFieldBorder(!!errors.message), pointerEvents: "auto", position: "relative", zIndex: 100 }}
+    />
+  );
+}
 
 function WireframeVector() {
   return (
@@ -64,21 +360,7 @@ function Frame2121450971() {
 
 function Frame2121450969() {
   return (
-    <div className="content-stretch flex gap-[44px] items-center justify-end relative shrink-0 w-[899.817px]">
-      <Frame2121450971 />
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">Case Studies</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">News/Blog</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">About Us</p>
-      </div>
-      <div className="font-['Poppins:Bold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">Contact</p>
-      </div>
-    </div>
+    <MenuNav active="Contact" />
   );
 }
 
@@ -141,10 +423,10 @@ function Frame2121451001() {
   return (
     <div className="absolute content-stretch flex flex-col gap-[11px] items-center leading-[0] text-center top-[181px] w-[777px]" style={{ left: "calc(11.111% + 177px)" }}>
       <div className="font-['Poppins:Bold',_sans-serif] h-[209px] not-italic relative shrink-0 text-[#a7c6ee] text-[77.333px] w-[985px]">
-        <p className="leading-[1.2]">{`Get in touch with us for inquiries, `}</p>
+        <p className="leading-[1.2]">{`Get in touch with us for inquiries, `}</p>
       </div>
       <div className="font-['Poppins:Light_Italic',_sans-serif] italic min-w-full relative shrink-0 text-[40px] text-white" style={{ width: "min-content" }}>
-        <p className="leading-[normal]">support, or collaborations. We’re here to help.</p>
+        <p className="leading-[normal]">support, or collaborations. We're here to help.</p>
       </div>
     </div>
   );
@@ -170,10 +452,10 @@ function Frame2121451030() {
   return (
     <div className="content-stretch flex flex-col gap-[20px] items-start leading-[0] not-italic relative shrink-0 w-full">
       <div className="font-['Poppins:Bold',_sans-serif] relative shrink-0 text-[#11112b] text-[75px] w-full">
-        <p className="leading-[82.432px]">{`Let's Connect​`}</p>
+        <p className="leading-[82.432px]">{`Let's Connect`}</p>
       </div>
       <div className="font-['Poppins:Regular',_sans-serif] leading-[30px] relative shrink-0 text-[20px] text-black w-full">
-        <p className="mb-0 whitespace-pre-wrap">{`Ready to transform your operations with technology that truly fits your business?  `}</p>
+        <p className="mb-0 whitespace-pre-wrap">{`Ready to transform your operations with technology that truly fits your business?  `}</p>
         <p>{`Whether you need custom software development, AI solutions, or specialized industry expertise, our team is here to understand your unique challenges and craft the perfect solution. Let's start the conversation about your next breakthrough.`}</p>
       </div>
     </div>
@@ -261,11 +543,20 @@ function Group2085664666() {
 }
 
 function Frame2121451007() {
+  const { handleSubmit, isSubmitting, submitted, apiError } = useContactForm();
   return (
-    <div className="absolute bg-white box-border content-stretch flex gap-[10px] h-[80px] items-center justify-center px-[43px] py-[24px] rounded-[15px] top-[2341px] w-[178px]" style={{ left: "calc(77.778% - 8px)" }}>
-      <div className="font-['Poppins:Bold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[24px] text-black text-nowrap">
-        <p className="leading-[32px] whitespace-pre">SUBMIT</p>
-      </div>
+    <div className="absolute box-border content-stretch flex flex-col gap-[10px] items-center top-[2341px]" style={{ left: "calc(77.778% - 8px)" }}>
+      <button
+        type="submit"
+        form="contactForm"
+        className="bg-white flex gap-[10px] h-[80px] items-center justify-center px-[43px] py-[24px] rounded-[15px] w-[178px] shadow-[3.867px_7.735px_38.673px_0px_rgba(17,17,43,0.05)]"
+        disabled={isSubmitting}
+        aria-busy={isSubmitting}
+      >
+        <div className="font-['Poppins:Bold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[24px] text-black text-nowrap">
+          <p className="leading-[32px] whitespace-pre">{isSubmitting ? "SENDING..." : "SUBMIT"}</p>
+        </div>
+      </button>
     </div>
   );
 }
@@ -294,9 +585,7 @@ function MessageForm() {
 function Frame2121451002() {
   return (
     <div className="[grid-area:1_/_1] bg-white box-border content-stretch flex gap-[10px] h-[62px] items-center ml-0 mt-[40px] pl-[21px] pr-[38px] py-[16px] relative rounded-[8px] w-[437px]">
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-50 relative shrink-0 text-[#11112b] text-[16px] text-nowrap">
-        <p className="leading-[30px] whitespace-pre">First Name</p>
-      </div>
+      <FirstNameInput />
     </div>
   );
 }
@@ -315,9 +604,7 @@ function Name() {
 function Frame2121451008() {
   return (
     <div className="[grid-area:1_/_1] bg-white box-border content-stretch flex gap-[10px] h-[62px] items-center ml-0 mt-[40px] pl-[21px] pr-[38px] py-[16px] relative rounded-[8px] w-[437px]">
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-50 relative shrink-0 text-[#11112b] text-[16px] text-nowrap">
-        <p className="leading-[30px] whitespace-pre">Last Name</p>
-      </div>
+      <LastNameInput />
     </div>
   );
 }
@@ -345,9 +632,7 @@ function Frame2121451003() {
 function Frame2121451009() {
   return (
     <div className="[grid-area:1_/_1] bg-white box-border content-stretch flex gap-[10px] h-[62px] items-center ml-0 mt-[40px] pl-[21px] pr-[38px] py-[16px] relative rounded-[8px] w-[437px]">
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-50 relative shrink-0 text-[#11112b] text-[16px] text-nowrap">
-        <p className="leading-[30px] whitespace-pre">Example@email.com</p>
-      </div>
+      <EmailInput />
     </div>
   );
 }
@@ -406,9 +691,7 @@ function Text() {
   return (
     <div className="content-stretch flex gap-[8px] h-[24px] items-center relative shrink-0 w-[544px]" data-name="Text">
       <Frame4646792 />
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-50 relative shrink-0 text-[#11112b] text-[16px] w-[304px]">
-        <p className="leading-[30px]">00-000-0000</p>
-      </div>
+      <PhoneInput />
       <Icon />
     </div>
   );
@@ -445,9 +728,7 @@ function Frame2121451013() {
 function Frame2121451014() {
   return (
     <div className="[grid-area:1_/_1] bg-white box-border content-stretch flex gap-[10px] h-[62px] items-center ml-0 mt-[40px] pl-[21px] pr-[38px] py-[16px] relative rounded-[8px] w-[437px]">
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-50 relative shrink-0 text-[#11112b] text-[16px] text-nowrap">
-        <p className="leading-[30px] whitespace-pre">Company Name</p>
-      </div>
+      <CompanyInput />
     </div>
   );
 }
@@ -495,9 +776,7 @@ function Text1() {
   return (
     <div className="content-stretch flex gap-[8px] h-[24px] items-start relative shrink-0 w-[544px]" data-name="Text">
       <Frame4646793 />
-      <div className="flex flex-col font-['Poppins:Regular',_sans-serif] h-[24px] justify-center leading-[0] not-italic opacity-50 relative shrink-0 text-[#11112b] text-[16px] w-[304px]">
-        <p className="leading-[30px]">e.g 50,000</p>
-      </div>
+      <BudgetInput />
       <Icon1 />
     </div>
   );
@@ -531,31 +810,11 @@ function Frame2121451004() {
   );
 }
 
-function Icon2() {
-  return (
-    <div className="relative shrink-0 size-[24px]" data-name="icon">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
-        <g clipPath="url(#clip0_7_420)" id="icon">
-          <path d={svgPaths.pdde3a00} fill="var(--fill-0, #18427A)" id="Vector" />
-          <g id="Vector_2"></g>
-        </g>
-        <defs>
-          <clipPath id="clip0_7_420">
-            <rect fill="white" height="24" width="24" />
-          </clipPath>
-        </defs>
-      </svg>
-    </div>
-  );
-}
 
 function Frame2121451016() {
   return (
     <div className="[grid-area:1_/_1] bg-white box-border content-stretch flex gap-[10px] h-[62px] items-center ml-0 mt-[40px] pl-[21px] pr-[38px] py-[16px] relative rounded-[8px] w-[898px]">
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-50 relative shrink-0 text-[#11112b] text-[16px] w-[824px]">
-        <p className="leading-[30px]">Select an option</p>
-      </div>
-      <Icon2 />
+      <HearAboutSelect />
     </div>
   );
 }
@@ -581,12 +840,10 @@ function Frame2121451005() {
 
 function Frame2121451017() {
   return (
-    <div className="bg-white h-[173px] relative rounded-[8px] shrink-0 w-full">
+    <div className="bg-white h-[173px] relative rounded-[8px] shrink-0 w-full" style={{ pointerEvents: "auto", zIndex: 50 }}>
       <div className="relative size-full">
-        <div className="box-border content-stretch flex gap-[10px] h-[173px] items-start pl-[21px] pr-[38px] py-[23px] relative w-full">
-          <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-50 relative shrink-0 text-[#11112b] text-[16px] text-nowrap">
-            <p className="leading-[30px] whitespace-pre">Enter Your Message ...</p>
-          </div>
+        <div className="box-border content-stretch flex gap-[10px] h-[173px] items-start pl-[21px] pr-[38px] py-[23px] relative w-full" style={{ zIndex: 50 }}>
+          <MessageTextarea />
         </div>
       </div>
     </div>
@@ -595,7 +852,7 @@ function Frame2121451017() {
 
 function Frame2121451006() {
   return (
-    <div className="[grid-area:1_/_1] box-border content-stretch flex flex-col items-start ml-0 mt-0 relative w-[898px]">
+    <div className="[grid-area:1_/_1] box-border content-stretch flex flex-col items-start ml-0 mt-0 relative w-[898px]" style={{ pointerEvents: "auto", zIndex: 50 }}>
       <div className="font-['Poppins:Regular',_sans-serif] h-[41px] leading-[32px] not-italic relative shrink-0 text-[20px] text-white w-full">
         <p className="mb-0">Message</p>
         <p>&nbsp;</p>
@@ -614,14 +871,15 @@ function Message() {
 }
 
 function Frame2121451018() {
+  const { handleSubmit } = useContactForm();
   return (
-    <div className="absolute content-stretch flex flex-col gap-[18px] items-start top-[1613px] w-[898px]" style={{ left: "calc(22.222% + 72px)" }}>
+    <form id="contactForm" onSubmit={(e) => void handleSubmit(e)} className="absolute content-stretch flex flex-col gap-[18px] items-start top-[1613px] w-[898px]" style={{ left: "calc(22.222% + 72px)" }}>
       <Frame2121451003 />
       <Frame2121451013 />
       <Frame2121451004 />
       <Frame2121451005 />
       <Message />
-    </div>
+    </form>
   );
 }
 
@@ -1152,7 +1410,7 @@ function Frame4646852() {
 
 function ScFullContactDesktop() {
   return (
-    <div className="absolute bg-[#11112b] h-[3094px] left-0 overflow-clip top-0 w-[1440px]" data-name="SC Full Contact - Desktop">
+    <div className="absolute bg-[#11112b] h-[3094px] left-0 overflow-clip top-0 w-[1440px]" data-name="ContactPage">
       <HeroSection />
       <Group2085664658 />
       <div className="absolute bg-gradient-to-b bottom-[63.12%] from-[rgba(213,217,229,0)] left-[0.07%] right-0 to-[#d5d9e5] top-[21.04%]" />
@@ -1165,7 +1423,9 @@ function ScFullContactDesktop() {
 export default function ContactPage() {
   return (
     <div className="relative size-full" data-name="ContactPage">
-      <ScFullContactDesktop />
+      <ContactFormProvider>
+        <ScFullContactDesktop />
+      </ContactFormProvider>
     </div>
   );
 }

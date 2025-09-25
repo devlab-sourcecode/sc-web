@@ -1,4 +1,6 @@
 import svgPaths from "./svg-6xc7n64g64";
+import React from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Footer } from "./footer";
 
 import imgRectangle424 from "figma:asset/193ae0716c6de33d90aa240a158618ad65583eff.png";
@@ -41,6 +43,7 @@ import imgImagePlaceholder3 from "figma:asset/13bbc3c799cad567f386b6ed571654e1c0
 import imgEllipse68 from "figma:asset/f43f1da354f1f1eabe330582e860f8cc029e911e.png";
 import imgEllipse69 from "figma:asset/8b5092d447ff501b9173a4c875c9b2ae19757afd.png";
 import imgEllipse70 from "figma:asset/65e06e26c3fc40cd1aa69faf8545a4f729286c8b.png";
+import MenuNav from "./meun";
 import imgImagePlaceholder4 from "figma:asset/40a7b7c2aa72b445c84e6179f4afa8c36c1c3330.png";
 import imgImagePlaceholder5 from "figma:asset/49b253b96b9760cf5eca29fb46709696b7b9332c.png";
 import { imgWireframeVector } from "./svg-9rxtm";
@@ -101,23 +104,7 @@ function Frame2121450971() {
 }
 
 function Frame2121450969() {
-  return (
-    <div className="content-stretch flex gap-[44px] items-center justify-end relative shrink-0 w-[899.817px]">
-      <Frame2121450971 />
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">Case Studies</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">News/Blog</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">About Us</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
-        <p className="leading-[26px] whitespace-pre">Contact</p>
-      </div>
-    </div>
-  );
+  return <MenuNav />;
 }
 
 function Frame2121450970() {
@@ -361,11 +348,118 @@ function Frame4646836() {
 }
 
 function Frame2121450974() {
+  const allUrls = useMemo(() => {
+    const modules = (import.meta as any).glob(
+      "/src/assets/logo/*.{png,jpg,jpeg,svg,webp}",
+      { eager: true, import: "default" }
+    ) as Record<string, string>;
+    return Object.entries(modules)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([, url]) => url);
+  }, []);
+
+  const [orderedUrls, setOrderedUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    let mounted = true;
+    const loadDimensions = (src: string) =>
+      new Promise<{ src: string; ratio: number; extreme: boolean }>((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          const w = img.naturalWidth || 1;
+          const h = img.naturalHeight || 1;
+          const ratio = w / h;
+          const extreme = ratio < 0.5 || ratio > 2.0;
+          resolve({ src, ratio, extreme });
+        };
+        img.onerror = () => resolve({ src, ratio: 1, extreme: false });
+        img.src = src;
+      });
+
+    Promise.all(allUrls.map(loadDimensions)).then((items) => {
+      if (!mounted) return;
+      items.sort((a, b) => {
+        if (a.extreme !== b.extreme) return a.extreme ? 1 : -1; // extreme to the end
+        const da = Math.abs(Math.log(a.ratio));
+        const db = Math.abs(Math.log(b.ratio));
+        return da - db;
+      });
+      setOrderedUrls(items.map((i) => i.src));
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, [allUrls]);
+
+  const logoSets = useMemo(() => {
+    const input = orderedUrls.length ? orderedUrls : allUrls;
+    const perSet = 18; // 3 rows x 6 per row
+    const result: string[][] = [];
+    for (let i = 0; i < input.length; i += perSet) {
+      result.push(input.slice(i, i + perSet));
+    }
+    return result;
+  }, [orderedUrls, allUrls]);
+
+  const [index, setIndex] = useState(0);
+  const current = logoSets[index] ?? [];
+
+  const rows: string[][] = useMemo(() => {
+    return [
+      current.slice(0, 6),
+      current.slice(6, 12),
+      current.slice(12, 18),
+    ];
+  }, [current]);
+
+  const canPrev = logoSets.length > 1;
+  const handlePrev = () => {
+    if (!canPrev) return;
+    setIndex((v) => (v - 1 + logoSets.length) % logoSets.length);
+  };
+  const handleNext = () => {
+    if (!canPrev) return;
+    setIndex((v) => (v + 1) % logoSets.length);
+  };
+
   return (
-    <div className="absolute content-stretch flex flex-col gap-[31.437px] items-start left-[136.48px] top-[875.9px] w-[838.943px]">
-      <Frame4646833 />
-      <Frame4646834 />
-      <Frame4646836 />
+    <div className="absolute left-[136.48px] top-[875.9px] w-[838.943px]">
+      <div className="relative bg-white rounded-[34.644px] px-[32px] py-8 w-full overflow-hidden">
+        <div className="relative mx-auto inline-block">
+          <button aria-label="Previous logos" onClick={handlePrev} className="absolute -left-6 top-1/2 -translate-y-1/2 z-10 flex h-[38.938px] items-center justify-center w-[20.859px]">
+            <div className="flex-none rotate-[-90deg]">
+              <div className="h-[20.861px] w-[38.94px]" data-name="Vector">
+                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 39 21">
+                  <path d={svgPaths.p1c6fc900} fill="var(--fill-0, #11112B)" fillOpacity="0.5" id="Vector" />
+                </svg>
+              </div>
+            </div>
+          </button>
+
+          <div className="content-stretch flex flex-col gap-[24px] items-stretch">
+            {rows.map((row, rIdx) => (
+              <div key={rIdx} className="box-border content-stretch flex gap-[24px] h-[86.228px] items-center w-full justify-center">
+                {row.map((url, i) => (
+                  <div key={`${rIdx}-${i}`} className="relative shrink-0 h-[86.228px] flex items-center justify-center">
+                    <img alt="logo" className="w-[90px] h-auto max-h-[64px] object-contain" src={url} />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+
+          <button aria-label="Next logos" onClick={handleNext} className="absolute -right-6 top-1/2 -translate-y-1/2 z-10 flex h-[38.938px] items-center justify-center w-[20.859px]">
+            <div className="flex-none rotate-[90deg]">
+              <div className="h+[20.861px] w-[38.94px]" data-name="Vector">
+                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 39 21">
+                  <path d={svgPaths.p1c6fc900} fill="var(--fill-0, #11112B)" fillOpacity="0.5" id="Vector" />
+                </svg>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -2302,19 +2396,14 @@ function ScHomepageDesktop() {
       <AboutSection />
       <ProjectsSection />
       <CtaSection />
-      <Frame2121450996 />
-      <div className="absolute font-['Poppins:Regular',_sans-serif] leading-[0] left-[74px] not-italic opacity-50 text-[16px] text-nowrap text-white top-[8352px]">
-        <p className="leading-[26px] whitespace-pre">© 2025 Sourcecode Co., Ltd. All rights reserved · Privacy Policy · Data Removal · Quality Policy</p>
-      </div>
-      <div className="absolute bg-white h-px left-[73px] opacity-50 top-[8329px] w-[1289px]" data-name="Line" />
+      <Footer baseTop={7870} withBackground={false} />
       <Group2085664658 />
       <Group2085664665 />
       <Group2085664659 />
       <Frame2121451009 />
       <Frame2121450993 />
       <FrameFooterContactInfo />
-      <FrameISO />
-      {/* <Footer /> */}
+      {/* footer moved to shared Footer component */}
     </div>
   );
 }

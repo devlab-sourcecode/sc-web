@@ -1,4 +1,13 @@
+import React from "react";
 import svgPaths from "./svg-lpde8ofs2o";
+
+type FooterProps = {
+  baseTop?: number;
+  withBackground?: boolean;
+  backgroundWidth?: number;
+  backgroundHeight?: number;
+  backgroundLeft?: number;
+};
 
 function Frame2121450994() {
   return (
@@ -134,9 +143,9 @@ function Explore2() {
   );
 }
 
-function Frame2121450996() {
+function Frame2121450996({ baseTop }: { baseTop: number }) {
   return (
-    <div className="absolute content-stretch flex gap-[78px] items-start leading-[0] top-[2604px]" style={{ left: "calc(55.556% + 43px)" }}>
+    <div className="absolute content-stretch flex gap-[78px] items-start leading-[0]" style={{ left: "calc(55.556% + 43px)", top: `${baseTop + 62}px` }}>
       <Explore />
       <Explore1 />
       <Explore2 />
@@ -256,9 +265,9 @@ function Frame2121451023() {
   );
 }
 
-function Frame2121451000() {
+function Frame2121451000({ baseTop }: { baseTop: number }) {
   return (
-    <div className="absolute content-stretch flex flex-col gap-[32px] items-start left-[75px] top-[2604px] w-[285px]">
+    <div className="absolute content-stretch flex flex-col gap-[32px] items-start left-[75px] w-[285px]" style={{ top: `${baseTop + 62}px` }}>
       <Frame354 />
       <Frame2121451023 />
     </div>
@@ -431,26 +440,28 @@ function Iso9001UkasWBg1() {
   );
 }
 
-function Frame4646852() {
+function Frame4646852({ baseTop }: { baseTop: number }) {
   return (
-    <div className="absolute content-stretch flex gap-[8px] items-center top-[2921px]" style={{ left: "calc(77.778% + 38px)" }}>
+    <div className="absolute content-stretch flex gap-[8px] items-center" style={{ left: "calc(77.778% + 38px)", top: `${baseTop + 379}px` }}>
       <Iso27001UkasWBg1 />
       <Iso9001UkasWBg1 />
     </div>
   );
 }
 
-export function Footer() {
+export function Footer({ baseTop = 2542, withBackground = true, backgroundWidth = 1448, backgroundHeight = 552, backgroundLeft = 0 }: FooterProps) {
   return (
-    <div className="absolute contents left-0 top-[2542px]">
-      <div className="absolute bg-[#234177] h-[552px] left-0 top-[2542px] w-[1448px]" data-name="Rectangle" />
-      <Frame2121450996 />
-      <div className="absolute font-['Poppins:Regular',_sans-serif] leading-[0] left-[74px] not-italic opacity-50 text-[16px] text-nowrap text-white top-[3024px]">
+    <div className="absolute contents left-0">
+      {withBackground ? (
+        <div className="absolute bg-[#234177]" data-name="Rectangle" style={{ left: backgroundLeft, top: baseTop, width: backgroundWidth, height: backgroundHeight }} />
+      ) : null}
+      <Frame2121450996 baseTop={baseTop} />
+      <div className="absolute font-['Poppins:Regular',_sans-serif] leading-[0] left-[74px] not-italic opacity-50 text-[16px] text-nowrap text-white" style={{ top: `${baseTop + 482}px` }}>
         <p className="leading-[26px] whitespace-pre">© 2025 Sourcecode Co., Ltd. All rights reserved · Privacy Policy · Data Removal · Quality Policy</p>
       </div>
-      <div className="absolute bg-white h-px left-[73px] opacity-50 top-[3001px] w-[1289px]" data-name="Line" />
-      <Frame2121451000 />
-      <Frame4646852 />
+      <div className="absolute bg-white h-px left-[73px] opacity-50" data-name="Line" style={{ top: `${baseTop + 459}px`, width: 1289 }} />
+      <Frame2121451000 baseTop={baseTop} />
+      <Frame4646852 baseTop={baseTop} />
     </div>
   );
 }

@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, Navig
 import HomePage from "./imports/home-page";
 import ContactPage from "./imports/contact-page";
 import OurServicepage from "./imports/our-service-page";
+import HotelSolutionsPage from "./imports/hotel-solutions-page";
+import AboutUsPage from "./imports/about-us-page";
+import { Toaster } from "./components/ui/sonner";
 
 // Navigation wrapper component to handle click events
 function NavigationWrapper({ children }: { children?: ReactNode }) {
@@ -24,17 +27,31 @@ function NavigationWrapper({ children }: { children?: ReactNode }) {
       return;
     }
     
-    // Handle Our Services navigation
+    // Handle Our Services navigation -> go to Hotel Solutions per requirement
     if (text === "Our Services") {
       e.preventDefault();
-      if (location.pathname === "/services") {
+      if (location.pathname === "/hotel-solutions") {
         window.scrollTo(0, 0);
       } else {
-        navigate("/services");
+        navigate("/hotel-solutions");
       }
       return;
     }
+
+    // Handle Hotel Solutions navigation
+    if (text === "Hotel Solutions") {
+      e.preventDefault();
+      navigate("/hotel-solutions");
+      return;
+    }
     
+    // Handle About Us navigation
+    if (text === "About Us") {
+      e.preventDefault();
+      navigate("/about-us");
+      return;
+    }
+
     // Handle logo clicks (look for Frame 352 or SVG elements)
     if (target.closest('svg') || target.tagName === 'path') {
       const svgParent = target.closest('div');
@@ -50,7 +67,7 @@ function NavigationWrapper({ children }: { children?: ReactNode }) {
     }
     
     // Handle other menu items - navigate to home for now
-    if (text === "About Us" || text === "Case Studies" || text === "News/Blog") {
+    if (text === "Case Studies" || text === "News/Blog") {
       e.preventDefault();
       if (location.pathname === "/") {
         window.scrollTo(0, 0);
@@ -105,14 +122,33 @@ function ServicesPageLink() {
   );
 }
 
+function HotelSolutionsPageLink() {
+  return (
+    <NavigationWrapper>
+      <HotelSolutionsPage />
+    </NavigationWrapper>
+  );
+}
+
+function AboutUsPageLink() {
+  return (
+    <NavigationWrapper>
+      <AboutUsPage />
+    </NavigationWrapper>
+  );
+}
 export default function App() {
   return (
     <Router>
       <ScrollToTop />
+      <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<HomePageLink />} />
         <Route path="/contact" element={<ContactPageLink />} />
         <Route path="/services" element={<ServicesPageLink />} />
+        <Route path="/hotel-solutions" element={<HotelSolutionsPageLink />} />
+        <Route path="/about-us" element={<AboutUsPageLink />} />
+
         {/* Catch-all route for unmatched paths - redirects to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
@@ -148,6 +184,8 @@ function ScaledCanvas({ children, baseWidth = 1440 }: { children?: ReactNode; ba
   }, [baseWidth]);
 
   useLayoutEffect(() => {
+    let rafId: number | null = null;
+
     const updateHeight = () => {
       const inner = innerRef.current;
       if (!inner) return;
@@ -155,14 +193,24 @@ function ScaledCanvas({ children, baseWidth = 1440 }: { children?: ReactNode; ba
       setReservedHeight(Math.ceil(rawHeight * scale));
     };
 
+    const scheduleUpdate = () => {
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = null;
+        updateHeight();
+      });
+    };
+
     updateHeight();
 
-    const ro = new ResizeObserver(() => updateHeight());
+    const ro = new ResizeObserver(() => scheduleUpdate());
     if (innerRef.current) ro.observe(innerRef.current);
-    const id = window.setInterval(updateHeight, 250);
+    window.addEventListener('resize', scheduleUpdate, { passive: true });
+
     return () => {
       ro.disconnect();
-      window.clearInterval(id);
+      window.removeEventListener('resize', scheduleUpdate as EventListener);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, [scale, children]);
 
@@ -175,7 +223,7 @@ function ScaledCanvas({ children, baseWidth = 1440 }: { children?: ReactNode; ba
             width: baseWidth,
             transform: `scale(${scale})`,
             transformOrigin: 'top center',
-            willChange: 'transform',
+            // will-change removed to avoid excessive GPU memory on mobile zoom/scroll
           }}
         >
           {children}
