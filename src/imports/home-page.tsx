@@ -1,6 +1,6 @@
 import svgPaths from "./svg-6xc7n64g64";
-import React from "react";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { getLogoSetColumns, getLogoSetNames } from "../assets/logo/sets";
 import { Footer } from "./footer";
 
 import imgRectangle424 from "figma:asset/193ae0716c6de33d90aa240a158618ad65583eff.png";
@@ -348,111 +348,73 @@ function Frame4646836() {
 }
 
 function Frame2121450974() {
-  const allUrls = useMemo(() => {
-    const modules = (import.meta as any).glob(
-      "/src/assets/logo/*.{png,jpg,jpeg,svg,webp}",
-      { eager: true, import: "default" }
-    ) as Record<string, string>;
-    return Object.entries(modules)
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([, url]) => url);
-  }, []);
-
-  const [orderedUrls, setOrderedUrls] = useState<string[]>([]);
-
-  useEffect(() => {
-    let mounted = true;
-    const loadDimensions = (src: string) =>
-      new Promise<{ src: string; ratio: number; extreme: boolean }>((resolve) => {
-        const img = new Image();
-        img.onload = () => {
-          const w = img.naturalWidth || 1;
-          const h = img.naturalHeight || 1;
-          const ratio = w / h;
-          const extreme = ratio < 0.5 || ratio > 2.0;
-          resolve({ src, ratio, extreme });
-        };
-        img.onerror = () => resolve({ src, ratio: 1, extreme: false });
-        img.src = src;
-      });
-
-    Promise.all(allUrls.map(loadDimensions)).then((items) => {
-      if (!mounted) return;
-      items.sort((a, b) => {
-        if (a.extreme !== b.extreme) return a.extreme ? 1 : -1; // extreme to the end
-        const da = Math.abs(Math.log(a.ratio));
-        const db = Math.abs(Math.log(b.ratio));
-        return da - db;
-      });
-      setOrderedUrls(items.map((i) => i.src));
-    });
-
-    return () => {
-      mounted = false;
-    };
-  }, [allUrls]);
-
-  const logoSets = useMemo(() => {
-    const input = orderedUrls.length ? orderedUrls : allUrls;
-    const perSet = 18; // 3 rows x 6 per row
-    const result: string[][] = [];
-    for (let i = 0; i < input.length; i += perSet) {
-      result.push(input.slice(i, i + perSet));
-    }
-    return result;
-  }, [orderedUrls, allUrls]);
+  // ใช้โครงสร้างโฟลเดอร์: /src/assets/logo/<set>/<col>/* โดยไม่วัดความกว้าง
+  const setNames = useMemo(() => getLogoSetNames(), []);
+  const sets = useMemo(() => setNames.map((name) => getLogoSetColumns(name)), [setNames]);
 
   const [index, setIndex] = useState(0);
-  const current = logoSets[index] ?? [];
+  const allRows: string[][][] = useMemo(() => {
+    return (sets ?? []).map((cols) => [cols[0] ?? [], cols[1] ?? [], cols[2] ?? []]);
+  }, [sets]);
 
-  const rows: string[][] = useMemo(() => {
-    return [
-      current.slice(0, 6),
-      current.slice(6, 12),
-      current.slice(12, 18),
-    ];
-  }, [current]);
+  useEffect(() => {
+    if (!sets.length) {
+      if (index !== 0) setIndex(0);
+      return;
+    }
+    if (index > sets.length - 1) {
+      setIndex(sets.length - 1);
+    }
+  }, [sets, index]);
 
-  const canPrev = logoSets.length > 1;
+  const canPrev = sets.length > 1;
   const handlePrev = () => {
     if (!canPrev) return;
-    setIndex((v) => (v - 1 + logoSets.length) % logoSets.length);
+    setIndex((v) => (v - 1 + sets.length) % sets.length);
   };
   const handleNext = () => {
     if (!canPrev) return;
-    setIndex((v) => (v + 1) % logoSets.length);
+    setIndex((v) => (v + 1) % sets.length);
   };
 
   return (
     <div className="absolute left-[136.48px] top-[875.9px] w-[838.943px]">
       <div className="relative bg-white rounded-[34.644px] px-[32px] py-8 w-full overflow-hidden">
-        <div className="relative mx-auto inline-block">
-          <button aria-label="Previous logos" onClick={handlePrev} className="absolute -left-6 top-1/2 -translate-y-1/2 z-10 flex h-[38.938px] items-center justify-center w-[20.859px]">
-            <div className="flex-none rotate-[-90deg]">
-              <div className="h-[20.861px] w-[38.94px]" data-name="Vector">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 39 21">
+        <div className="mx-auto inline-block">
+          <button aria-label="Previous logos" onClick={handlePrev} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 flex h-[38.938px] items-center justify-center w-[20.859px]">
+            <div className="flex-none">
+              <div className="h-[38.94px] w-[20.861px]" data-name="Vector">
+                <svg className="block size-full" style={{ transform: "rotate(90deg)", width: "40px"  }} fill="none" preserveAspectRatio="none" viewBox="0 0 39 21">
                   <path d={svgPaths.p1c6fc900} fill="var(--fill-0, #11112B)" fillOpacity="0.5" id="Vector" />
                 </svg>
               </div>
             </div>
           </button>
 
-          <div className="content-stretch flex flex-col gap-[24px] items-stretch">
-            {rows.map((row, rIdx) => (
-              <div key={rIdx} className="box-border content-stretch flex gap-[24px] h-[86.228px] items-center w-full justify-center">
-                {row.map((url, i) => (
-                  <div key={`${rIdx}-${i}`} className="relative shrink-0 h-[86.228px] flex items-center justify-center">
-                    <img alt="logo" className="w-[90px] h-auto max-h-[64px] object-contain" src={url} />
+          <div className="overflow-hidden">
+            <div className="flex transition-transform duration-500 ease-out" style={{ transform: `translateX(-${index * 100}%)` }}>
+              {allRows.map((rows, sIdx) => (
+                <div key={sIdx} className="w-full shrink-0">
+                  <div className="content-stretch flex flex-col gap-[24px] items-stretch">
+                    {rows.map((row, rIdx) => (
+                      <div key={rIdx} className="box-border content-stretch flex gap-[24px] h-[86.228px] items-center w-full justify-center">
+                        {row.map((url, i) => (
+                          <div key={`${rIdx}-${i}`} className="relative shrink-0 w-[90px] h-[64px] flex items-center justify-center">
+                            <img alt="logo" className="max-w-full max-h-full object-contain" src={url} />
+                          </div>
+                        ))}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <button aria-label="Next logos" onClick={handleNext} className="absolute -right-6 top-1/2 -translate-y-1/2 z-10 flex h-[38.938px] items-center justify-center w-[20.859px]">
-            <div className="flex-none rotate-[90deg]">
-              <div className="h+[20.861px] w-[38.94px]" data-name="Vector">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 39 21">
+          <button aria-label="Next logos" onClick={handleNext} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 flex h-[38.938px] items-center justify-center w-[20.859px]">
+            <div className="flex-none">
+              <div className="h-[38.94px] w-[20.861px]" data-name="Vector">
+                <svg className="block size-full" style={{ transform: "rotate(-90deg)", width: "40px" }} fill="none" preserveAspectRatio="none" viewBox="0 0 39 21">
                   <path d={svgPaths.p1c6fc900} fill="var(--fill-0, #11112B)" fillOpacity="0.5" id="Vector" />
                 </svg>
               </div>
@@ -1786,10 +1748,12 @@ function Frame2121450981() {
 
 function Frame2121450982() {
   return (
-    <div className="[grid-area:1_/_1] box-border content-stretch flex gap-[83px] items-center ml-[111px] mt-[322px] relative w-[1218px]">
+    <div className="[grid-area:1_/_1] box-border content-stretch flex gap-[83px] items-center ml-[111px] mt-[322px] relative w-[1218px] overflow-x-auto">
       <Frame2121450979 />
       <Frame2121450980 />
       <Frame2121450981 />
+      <Frame2121450979 />
+      <Frame2121450980 />
     </div>
   );
 }

@@ -1,21 +1,14 @@
 // Utility helpers to load logo images grouped by folder sets
-// Usage:
-// - Create folders like: src/assets/logo/set1, src/assets/logo/set2
-// - Put .png/.jpg/.jpeg/.webp/.svg files inside each set folder
-// - In component: import { getLogoSet } from '@/assets/logo/sets'
-//   const logos = getLogoSet('set1') // -> string[] of URLs
-
-type LogoModule = { default: string } | string
+// Usage structure:
+// - Folders: src/assets/logo/<set>/<col>/*.png|jpg|jpeg|webp|svg
+// - getLogoSetNames(): string[] of set names
+// - getLogoSetColumns('set1'): string[][] where each inner array is a column (row)
 
 // Preload all logo files under src/assets/logo/** using Vite's glob import
-const allLogoFiles = import.meta.glob<LogoModule>(
+const allLogoFiles = (import.meta as any).glob(
   '/src/assets/logo/**/*.{png,jpg,jpeg,webp,svg}',
   { eager: true, import: 'default' }
-)
-
-function toUrl(mod: LogoModule): string {
-  return typeof mod === 'string' ? mod : mod
-}
+) as Record<string, string>
 
 function extractSetName(path: string): string | null {
   // Matches /src/assets/logo/<setName>/filename.ext
@@ -29,7 +22,7 @@ export function getAllLogoSets(): Record<string, string[]> {
     const setName = extractSetName(path)
     if (!setName) continue
     if (!result[setName]) result[setName] = []
-    result[setName].push(toUrl(mod))
+    result[setName].push(mod)
   }
   return result
 }
@@ -39,6 +32,35 @@ export function getLogoSet(setName: string): string[] {
   return sets[setName] ?? []
 }
 
-export default { getLogoSet, getAllLogoSets }
+function extractColName(path: string): { set: string; col: string } | null {
+  // Matches /src/assets/logo/<set>/<col>/filename.ext
+  const match = path.match(/\/src\/assets\/logo\/([^/]+)\/([^/]+)\//)
+  if (!match) return null
+  return { set: match[1], col: match[2] }
+}
+
+export function getLogoSetColumns(setName: string): string[][] {
+  const colMap: Record<string, string[]> = {}
+  for (const [path, mod] of Object.entries(allLogoFiles)) {
+    const info = extractColName(path)
+    if (!info) continue
+    if (info.set !== setName) continue
+    if (!colMap[info.col]) colMap[info.col] = []
+    colMap[info.col].push(mod)
+  }
+  const sortKey = (name: string) => {
+    const m = name.match(/(\d+)$/)
+    return m ? parseInt(m[1], 10) : Number.MAX_SAFE_INTEGER
+  }
+  const cols = Object.keys(colMap).sort((a, b) => sortKey(a) - sortKey(b))
+  return cols.map((c) => colMap[c])
+}
+
+export function getLogoSetNames(): string[] {
+  const sets = getAllLogoSets()
+  return Object.keys(sets).sort()
+}
+
+export default { getLogoSet, getAllLogoSets, getLogoSetColumns, getLogoSetNames }
 
 

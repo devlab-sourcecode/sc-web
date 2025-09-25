@@ -1140,7 +1140,7 @@ function Group2085664681() {
 
 function MaskGroup() {
   return (
-    <div className="absolute contents left-0 top-[2px]" data-name="Mask group">
+    <div className="absolute left-0 top-0 h-[477px] w-[383px] overflow-hidden rounded-[24.08px] pointer-events-none" data-name="Mask group">
       <div className="absolute flex h-[714.501px] items-center justify-center left-[-116.19px] top-[-136px] w-[720.391px]">
         <div className="flex-none rotate-[10.112deg]">
           <div className="h-[614.829px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[116.193px_138px] mask-size-[383px_477px] relative w-[622.119px]" data-name="S__23969803_0-removebg 1" style={{ maskImage: `url('${imgS239698030Removebg1}')` }}>
