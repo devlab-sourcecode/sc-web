@@ -12,15 +12,39 @@ type MenuNavProps = {
 export function MenuNav({ active, onOpen, onScheduleClose }: MenuNavProps) {
   const itemClass = (label: string) =>
     label === active
-      ? "font-['Poppins:Bold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white"
-      : "font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white";
+      ? "font-['Poppins:Bold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white hover:opacity-100"
+      : "font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white opacity-80 hover:opacity-100";
+  const [open, setOpen] = useState(false);
+  const hideTimeoutRef = useRef<number | null>(null);
+
+  const clearHide = () => {
+    if (hideTimeoutRef.current !== null) {
+      window.clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+  };
+
+  const handleEnter = () => {
+    clearHide();
+    setOpen(true);
+    onOpen?.();
+  };
+
+  const handleLeave = () => {
+    clearHide();
+    hideTimeoutRef.current = window.setTimeout(() => {
+      setOpen(false);
+      hideTimeoutRef.current = null;
+      onScheduleClose?.();
+    }, 180);
+  };
 
   return (
     <div className="content-stretch flex gap-[44px] items-center justify-end relative shrink-0 w-[899.817px]">
       <div
         className="content-stretch flex items-center justify-between relative shrink-0 w-[122px]"
-        onMouseEnter={onOpen}
-        onMouseLeave={onScheduleClose}
+        onMouseEnter={handleEnter}
+        onMouseLeave={handleLeave}
       >
         <div className={itemClass("Our Services")}>
           <p className="leading-[26px] whitespace-pre">Our Services</p>
@@ -30,7 +54,27 @@ export function MenuNav({ active, onOpen, onScheduleClose }: MenuNavProps) {
             <path d="M1 1.5L7 6.5L13 1.5" fill="white" />
           </svg>
         </div>
-
+        {/* Hover bridge to prevent gap between trigger and dropdown */}
+        {open && (
+          <div className="absolute left-0 top-full" style={{ width: 260, height: 40 }} aria-hidden onMouseEnter={handleEnter} onMouseLeave={handleLeave} />
+        )}
+        {open && (
+          <ul
+            role="menu"
+            className="absolute left-0 z-[100] w-[260px] rounded-[12px] shadow-xl overflow-hidden"
+            style={{ top: 40 }}
+            onMouseEnter={handleEnter}
+            onMouseLeave={handleLeave}
+          >
+            <li
+              role="menuitem"
+              className="block w-full px-4 py-3 cursor-pointer text-[16px] text-[#ffffff] hover:bg-white/15"
+              style={{ color: '#ffffff' }}
+            >
+              Hotel Solutions
+            </li>
+          </ul>
+        )}
       </div>
       {/* <div className={itemClass("Case Studies")}>
         <p className="leading-[26px] whitespace-pre">Case Studies</p>

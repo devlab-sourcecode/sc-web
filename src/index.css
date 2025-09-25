@@ -5761,6 +5761,30 @@ html {
   cursor: pointer;
 }
 
+/* Global pointer cursor for interactive elements */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+a[href],
+[role="link"]:not([aria-disabled="true"]),
+summary,
+input[type="button"]:not(:disabled),
+input[type="submit"]:not(:disabled),
+input[type="reset"]:not(:disabled),
+[role="menuitem"]:not([aria-disabled="true"]),
+[role="option"]:not([aria-disabled="true"]),
+[role="tab"]:not([aria-disabled="true"]),
+[role="switch"]:not([aria-disabled="true"]),
+[role="checkbox"]:not([aria-disabled="true"]),
+[role="radio"]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+/* Keep disabled states not-allowed */
+[aria-disabled="true"],
+:disabled {
+  cursor: not-allowed;
+}
+
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;

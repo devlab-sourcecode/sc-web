@@ -23,6 +23,9 @@ declare module '*.svg' {
   export default src;
 }
 
+// Explicit modules for direct asset folder imports used in code
+ 
+
 
 // Allow figma:asset virtual imports emitted by design-to-code tools
 declare module 'figma:asset/*' {

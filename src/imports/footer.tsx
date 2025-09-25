@@ -1,5 +1,9 @@
 import React from "react";
 import svgPaths from "./svg-lpde8ofs2o";
+import { Link } from "react-router-dom";
+
+import ISO9001 from "../assets/ISO_9001_UKAS_W-BG_1.png";
+import ISO27001 from "../assets/ISO_27001_UKAS_W-BG_1.png";
 
 type FooterProps = {
   baseTop?: number;
@@ -12,13 +16,15 @@ type FooterProps = {
 function Frame2121450994() {
   return (
     <div className="content-stretch flex flex-col font-['Poppins:Regular',_sans-serif] gap-[8px] items-start leading-[0] not-italic relative shrink-0 text-[14px] text-white w-[63px]">
-      <div className="opacity-75 relative shrink-0">
-        <p className="leading-[30px] whitespace-pre">About</p>
+      <div className="opacity-75 hover:opacity-100 relative shrink-0">
+        <Link to="/about-us" className="leading-[30px] whitespace-pre inline-block">About</Link>
       </div>
-      <div className="opacity-75 relative shrink-0">
-        <p className="leading-[30px] whitespace-pre">Services</p>
+      <div className="opacity-75 hover:opacity-100 relative shrink-0">
+        <span className="leading-[30px] whitespace-pre inline-block cursor-default select-none" aria-disabled>
+          Services
+        </span>
       </div>
-      <div className="opacity-75 relative shrink-0">
+      {/* <div className="opacity-75 relative shrink-0">
         <p className="leading-[30px] whitespace-pre">Pricing</p>
       </div>
       <div className="opacity-75 relative shrink-0">
@@ -26,7 +32,7 @@ function Frame2121450994() {
       </div>
       <div className="opacity-75 relative shrink-0 text-nowrap">
         <p className="leading-[30px] whitespace-pre">Careers</p>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -53,7 +59,7 @@ function Explore() {
 function Frame2121451019() {
   return (
     <div className="content-stretch flex flex-col font-['Poppins:Regular',_sans-serif] gap-[8px] items-start leading-[0] not-italic relative shrink-0 text-[14px] text-nowrap text-white w-[63px]">
-      <div className="opacity-75 relative shrink-0">
+      {/* <div className="opacity-75 relative shrink-0">
         <p className="leading-[30px] text-nowrap whitespace-pre">AI Solutions</p>
       </div>
       <div className="opacity-75 relative shrink-0">
@@ -61,13 +67,13 @@ function Frame2121451019() {
       </div>
       <div className="opacity-75 relative shrink-0">
         <p className="leading-[30px] text-nowrap whitespace-pre">Pricing</p>
+      </div> */}
+      <div className="opacity-75 hover:opacity-100 relative shrink-0">
+        <p className="leading-[30px] text-nowrap whitespace-pre cursor-pointer">Hotel Solutions</p>
       </div>
-      <div className="opacity-75 relative shrink-0">
-        <p className="leading-[30px] text-nowrap whitespace-pre">Hotel Solutions</p>
-      </div>
-      <div className="opacity-75 relative shrink-0">
+      {/* <div className="opacity-75 relative shrink-0">
         <p className="leading-[30px] text-nowrap whitespace-pre">Sightbot</p>
-      </div>
+      </div> */}
     </div>
   );
 }
@@ -106,7 +112,15 @@ function BiLine() {
 function Frame466() {
   return (
     <div className="content-stretch flex gap-[18px] items-center relative shrink-0 w-full">
-      <BiLine />
+      <a
+        href={(import.meta as any).env?.VITE_LINE_ADD_URL ?? "https://line.me/R/ti/p/@YOUR_ID"}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Add LINE"
+        className="inline-block"
+      >
+        <BiLine />
+      </a>
       <a
         href="https://www.facebook.com/sourcecodeth/"
         target="_blank"
@@ -201,7 +215,9 @@ function Frame2121450997() {
     <div className="content-stretch flex gap-[16px] items-start relative shrink-0">
       <TdesignCall1 />
       <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-75 relative shrink-0 text-[14px] text-nowrap text-white">
-        <p className="leading-[30px] whitespace-pre">089-253-9595, 02-111-8829</p>
+        <a href="tel:+66892539595" className="leading-[30px] whitespace-pre">089-253-9595</a>
+        <span className="leading-[30px] whitespace-pre">, </span>
+        <a href="tel:+6621118829" className="leading-[30px] whitespace-pre">02-111-8829</a>
       </div>
     </div>
   );
@@ -224,7 +240,7 @@ function Frame2121450998() {
     <div className="content-stretch flex gap-[16px] items-start relative shrink-0">
       <IcOutlineEmail1 />
       <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-75 relative shrink-0 text-[14px] text-nowrap text-white">
-        <p className="leading-[30px] whitespace-pre">commercial@sourcecode.co.th</p>
+        <a href="mailto:commercial@sourcecode.co.th" className="leading-[30px] whitespace-pre">commercial@sourcecode.co.th</a>
       </div>
     </div>
   );
@@ -251,11 +267,11 @@ function Frame2121450999() {
         <p>
           75/62–65, BKCS Group Building
           <br aria-hidden="true" />
-          {` Soi Ramkhamhaeng 21, Ramkhamhaeng Road`}
+          {`Soi Ramkhamhaeng 21, Ramkhamhaeng Road`}
           <br aria-hidden="true" />
-          {` Hua Mak Subdistrict, Bang Kapi District`}
+          {`Hua Mak Subdistrict, Bang Kapi District`}
           <br aria-hidden="true" />
-          {` Bangkok 10240, Thailand`}
+          {`Bangkok 10240, Thailand`}
         </p>
       </div>
     </div>
@@ -281,177 +297,11 @@ function Frame2121451000({ baseTop }: { baseTop: number }) {
   );
 }
 
-function Iso27001UkasWBg1() {
-  return (
-    <div className="h-[49px] relative shrink-0 w-[97px]" data-name="ISO 27001 UKAS W-BG 1">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 97 49">
-        <g clipPath="url(#clip0_7_434)" id="ISO 27001 UKAS W-BG 1">
-          <path d={svgPaths.pfa85d20} fill="var(--fill-0, white)" id="Vector" />
-          <path d={svgPaths.p284e4b80} fill="var(--fill-0, #231F20)" id="Vector_2" />
-          <path d={svgPaths.p2cf8e000} fill="var(--fill-0, white)" id="Vector_3" />
-          <path d={svgPaths.pb33fb00} fill="url(#paint0_radial_7_434)" id="Vector_4" />
-          <path d={svgPaths.p163e3e00} fill="url(#paint1_radial_7_434)" id="Vector_5" />
-          <path d={svgPaths.p28846f00} fill="var(--fill-0, #231F20)" id="Vector_6" />
-          <path d={svgPaths.p7617300} fill="var(--fill-0, #231F20)" id="Vector_7" />
-          <path d={svgPaths.pbd70270} fill="var(--fill-0, #231F20)" id="Vector_8" />
-          <path d={svgPaths.p28333d80} fill="var(--fill-0, #231F20)" id="Vector_9" />
-          <path d={svgPaths.p30034300} fill="var(--fill-0, #231F20)" id="Vector_10" />
-          <path d={svgPaths.p1f405700} fill="var(--fill-0, #231F20)" id="Vector_11" />
-          <path d={svgPaths.p243755f0} fill="var(--fill-0, #231F20)" id="Vector_12" />
-          <path d={svgPaths.p21fc940} fill="var(--fill-0, #231F20)" id="Vector_13" />
-          <path d={svgPaths.p19ea6600} fill="var(--fill-0, #231F20)" id="Vector_14" />
-          <path d={svgPaths.p4db6c80} fill="var(--fill-0, #231F20)" id="Vector_15" />
-          <path d={svgPaths.p297f2500} fill="var(--fill-0, #231F20)" id="Vector_16" />
-          <path d={svgPaths.p3088bf80} fill="var(--fill-0, #231F20)" id="Vector_17" />
-          <path d={svgPaths.p1f55d440} fill="var(--fill-0, #231F20)" id="Vector_18" />
-          <path d={svgPaths.p36ce7e00} fill="var(--fill-0, #231F20)" id="Vector_19" />
-          <path d={svgPaths.p17824300} fill="var(--fill-0, #231F20)" id="Vector_20" />
-          <path d={svgPaths.p2fbbc300} fill="var(--fill-0, #231F20)" id="Vector_21" />
-          <path d={svgPaths.p26e66b80} fill="var(--fill-0, #231F20)" id="Vector_22" />
-          <path d={svgPaths.p43fdf00} fill="var(--fill-0, #231F20)" id="Vector_23" />
-          <path d={svgPaths.p313f8980} fill="var(--fill-0, #231F20)" id="Vector_24" />
-          <path d={svgPaths.p9c7ad00} fill="var(--fill-0, #231F20)" id="Vector_25" />
-          <path d={svgPaths.p360bc300} fill="var(--fill-0, #231F20)" id="Vector_26" />
-          <path d={svgPaths.p1e73f100} fill="var(--fill-0, #231F20)" id="Vector_27" />
-          <path d={svgPaths.p202ed780} fill="var(--fill-0, #231F20)" id="Vector_28" />
-          <path d={svgPaths.p253e5200} fill="var(--fill-0, #231F20)" id="Vector_29" />
-          <path d={svgPaths.p11f04f00} fill="var(--fill-0, #231F20)" id="Vector_30" />
-          <path d={svgPaths.p2a8b5300} fill="var(--fill-0, #231F20)" id="Vector_31" />
-          <path d={svgPaths.pe237480} fill="var(--fill-0, #231F20)" id="Vector_32" />
-          <path d={svgPaths.p3e47a00} fill="var(--fill-0, #231F20)" id="Vector_33" />
-          <path d={svgPaths.p187daa00} fill="var(--fill-0, #231F20)" id="Vector_34" />
-          <path d={svgPaths.p40fe500} fill="var(--fill-0, #231F20)" id="Vector_35" />
-          <path d={svgPaths.p345cee00} fill="var(--fill-0, #231F20)" id="Vector_36" />
-          <path d={svgPaths.p3a040b80} fill="var(--fill-0, #231F20)" id="Vector_37" />
-          <path d={svgPaths.p141f4000} fill="var(--fill-0, #231F20)" id="Vector_38" />
-          <path d={svgPaths.p15241e00} fill="var(--fill-0, #231F20)" id="Vector_39" />
-          <path d={svgPaths.p2b4e5280} fill="var(--fill-0, #231F20)" id="Vector_40" />
-          <path d={svgPaths.p12938f00} fill="var(--fill-0, #231F20)" id="Vector_41" />
-          <path d={svgPaths.p26389700} fill="var(--fill-0, #231F20)" id="Vector_42" />
-          <path d={svgPaths.p1a116e40} fill="var(--fill-0, #231F20)" id="Vector_43" />
-          <path d={svgPaths.p16c87480} fill="var(--fill-0, #231F20)" id="Vector_44" />
-          <path d={svgPaths.pd6e8400} fill="var(--fill-0, #231F20)" id="Vector_45" />
-          <path d={svgPaths.pd23e900} fill="var(--fill-0, #231F20)" id="Vector_46" />
-          <path d={svgPaths.p1beaec00} fill="var(--fill-0, #231F20)" id="Vector_47" />
-          <path d={svgPaths.pb241800} fill="var(--fill-0, #231F20)" id="Vector_48" />
-        </g>
-        <defs>
-          <radialGradient cx="0" cy="0" gradientTransform="translate(24.669 16.6539) scale(22.5105 22.3058)" gradientUnits="userSpaceOnUse" id="paint0_radial_7_434" r="1">
-            <stop offset="0.25" stopColor="#F6F6F6" />
-            <stop offset="0.43" stopColor="#F1F1F1" />
-            <stop offset="0.65" stopColor="#E3E4E4" />
-            <stop offset="0.88" stopColor="#CBCDCE" />
-            <stop offset="1" stopColor="#BCBEC0" />
-          </radialGradient>
-          <radialGradient cx="0" cy="0" gradientTransform="translate(23.5073 16.878) scale(23.7206 23.5049)" gradientUnits="userSpaceOnUse" id="paint1_radial_7_434" r="1">
-            <stop offset="0.25" stopColor="#DCDDDE" />
-            <stop offset="0.41" stopColor="#D7D8D9" />
-            <stop offset="0.6" stopColor="#C9CACC" />
-            <stop offset="0.8" stopColor="#B1B3B5" />
-            <stop offset="1" stopColor="#939598" />
-          </radialGradient>
-          <clipPath id="clip0_7_434">
-            <rect fill="white" height="49" width="97" />
-          </clipPath>
-        </defs>
-      </svg>
-    </div>
-  );
-}
-
-function Vrstva1() {
-  return (
-    <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 97 49">
-      <g id="Vrstva 1">
-        <path d="M97 0H0V49H97V0Z" fill="var(--fill-0, white)" id="Vector" />
-        <path d={svgPaths.pd6e8400} fill="var(--fill-0, #231F20)" id="Vector_2" />
-        <path d={svgPaths.pd23e900} fill="var(--fill-0, #231F20)" id="Vector_3" />
-        <path d={svgPaths.p284e4b80} fill="var(--fill-0, #231F20)" id="Vector_4" />
-        <path d={svgPaths.p2cf8e000} fill="var(--fill-0, white)" id="Vector_5" />
-        <path d={svgPaths.pb33fb00} fill="url(#paint0_radial_7_356)" id="Vector_6" />
-        <path d={svgPaths.p163e3e00} fill="url(#paint1_radial_7_356)" id="Vector_7" />
-        <path d={svgPaths.p28846f00} fill="var(--fill-0, #231F20)" id="Vector_8" />
-        <path d={svgPaths.p7617300} fill="var(--fill-0, #231F20)" id="Vector_9" />
-        <path d={svgPaths.pbd70270} fill="var(--fill-0, #231F20)" id="Vector_10" />
-        <path d={svgPaths.p28333d80} fill="var(--fill-0, #231F20)" id="Vector_11" />
-        <path d={svgPaths.p30034300} fill="var(--fill-0, #231F20)" id="Vector_12" />
-        <path d={svgPaths.p1704c780} fill="var(--fill-0, #231F20)" id="Vector_13" />
-        <path d={svgPaths.p35dae800} fill="var(--fill-0, #231F20)" id="Vector_14" />
-        <path d={svgPaths.p1cd4b180} fill="var(--fill-0, #231F20)" id="Vector_15" />
-        <path d={svgPaths.p32d13200} fill="var(--fill-0, #231F20)" id="Vector_16" />
-        <path d={svgPaths.pdb0b80} fill="var(--fill-0, #231F20)" id="Vector_17" />
-        <path d={svgPaths.p25378a00} fill="var(--fill-0, #231F20)" id="Vector_18" />
-        <path d={svgPaths.p162a9a00} fill="var(--fill-0, #231F20)" id="Vector_19" />
-        <path d={svgPaths.p36ce7e00} fill="var(--fill-0, #231F20)" id="Vector_20" />
-        <path d={svgPaths.p17824300} fill="var(--fill-0, #231F20)" id="Vector_21" />
-        <path d={svgPaths.p2fbbc300} fill="var(--fill-0, #231F20)" id="Vector_22" />
-        <path d={svgPaths.p26e66b80} fill="var(--fill-0, #231F20)" id="Vector_23" />
-        <path d={svgPaths.p43fdf00} fill="var(--fill-0, #231F20)" id="Vector_24" />
-        <path d={svgPaths.p313f8980} fill="var(--fill-0, #231F20)" id="Vector_25" />
-        <path d={svgPaths.p9c7ad00} fill="var(--fill-0, #231F20)" id="Vector_26" />
-        <path d={svgPaths.p360bc300} fill="var(--fill-0, #231F20)" id="Vector_27" />
-        <path d={svgPaths.p1e73f100} fill="var(--fill-0, #231F20)" id="Vector_28" />
-        <path d={svgPaths.p202ed780} fill="var(--fill-0, #231F20)" id="Vector_29" />
-        <path d={svgPaths.p253e5200} fill="var(--fill-0, #231F20)" id="Vector_30" />
-        <path d={svgPaths.p11f04f00} fill="var(--fill-0, #231F20)" id="Vector_31" />
-        <path d={svgPaths.p2a8b5300} fill="var(--fill-0, #231F20)" id="Vector_32" />
-        <path d={svgPaths.pe237480} fill="var(--fill-0, #231F20)" id="Vector_33" />
-        <path d={svgPaths.p3e47a00} fill="var(--fill-0, #231F20)" id="Vector_34" />
-        <path d={svgPaths.p187daa00} fill="var(--fill-0, #231F20)" id="Vector_35" />
-        <path d={svgPaths.p40fe500} fill="var(--fill-0, #231F20)" id="Vector_36" />
-        <path d={svgPaths.p345cee00} fill="var(--fill-0, #231F20)" id="Vector_37" />
-        <path d={svgPaths.p3a040b80} fill="var(--fill-0, #231F20)" id="Vector_38" />
-        <path d={svgPaths.p141f4000} fill="var(--fill-0, #231F20)" id="Vector_39" />
-        <path d={svgPaths.p15241e00} fill="var(--fill-0, #231F20)" id="Vector_40" />
-        <path d={svgPaths.p2b4e5280} fill="var(--fill-0, #231F20)" id="Vector_41" />
-        <path d={svgPaths.p12938f00} fill="var(--fill-0, #231F20)" id="Vector_42" />
-        <path d={svgPaths.p26389700} fill="var(--fill-0, #231F20)" id="Vector_43" />
-        <path d={svgPaths.p1a116e40} fill="var(--fill-0, #231F20)" id="Vector_44" />
-        <path d={svgPaths.p16c87480} fill="var(--fill-0, #231F20)" id="Vector_45" />
-        <path d={svgPaths.p1beaec00} fill="var(--fill-0, #231F20)" id="Vector_46" />
-        <path d={svgPaths.pb241800} fill="var(--fill-0, #231F20)" id="Vector_47" />
-      </g>
-      <defs>
-        <radialGradient cx="0" cy="0" gradientTransform="translate(24.669 16.6539) scale(22.5105 22.3058)" gradientUnits="userSpaceOnUse" id="paint0_radial_7_356" r="1">
-          <stop offset="0.25" stopColor="#F6F6F6" />
-          <stop offset="0.43" stopColor="#F1F1F1" />
-          <stop offset="0.65" stopColor="#E3E4E4" />
-          <stop offset="0.88" stopColor="#CBCDCE" />
-          <stop offset="1" stopColor="#BCBEC0" />
-        </radialGradient>
-        <radialGradient cx="0" cy="0" gradientTransform="translate(23.5073 16.878) scale(23.7206 23.5049)" gradientUnits="userSpaceOnUse" id="paint1_radial_7_356" r="1">
-          <stop offset="0.25" stopColor="#DCDDDE" />
-          <stop offset="0.41" stopColor="#D7D8D9" />
-          <stop offset="0.6" stopColor="#C9CACC" />
-          <stop offset="0.8" stopColor="#B1B3B5" />
-          <stop offset="1" stopColor="#939598" />
-        </radialGradient>
-      </defs>
-    </svg>
-  );
-}
-
-function Layer2() {
-  return (
-    <div className="absolute contents inset-0" data-name="Layer 2">
-      <Vrstva1 />
-    </div>
-  );
-}
-
-function Iso9001UkasWBg1() {
-  return (
-    <div className="h-[49px] overflow-clip relative shrink-0 w-[97px]" data-name="ISO 9001 UKAS W-BG 1">
-      <Layer2 />
-    </div>
-  );
-}
-
 function Frame4646852({ baseTop }: { baseTop: number }) {
   return (
     <div className="absolute content-stretch flex gap-[8px] items-center" style={{ left: "calc(77.778% + 38px)", top: `${baseTop + 379}px` }}>
-      <Iso27001UkasWBg1 />
-      <Iso9001UkasWBg1 />
+      <img src={ISO27001} alt="ISO 27001 UKAS W-BG 1" />
+      <img src={ISO9001} alt="ISO 9001 UKAS W-BG 1" />
     </div>
   );
 }

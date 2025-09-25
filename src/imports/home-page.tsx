@@ -1,57 +1,60 @@
 import svgPaths from "./svg-6xc7n64g64";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useIsMobile } from "../components/ui/use-mobile";
 import { getLogoSetColumns, getLogoSetNames } from "../assets/logo/sets";
 import { Footer } from "./footer";
 import { useNavigate } from "react-router-dom";
 
-import imgRectangle424 from "figma:asset/193ae0716c6de33d90aa240a158618ad65583eff.png";
-import imgBackground from "figma:asset/852860408de8254621186898a68e4c7eb55d8760.png";
-import imgTwzPublicCompanyLimitedNonVoting600 from "figma:asset/63b1f5ad501cbd34d07bc43c3c382675662d45d8.png";
-import imgLogoTtw from "figma:asset/cf4ce5499a5083f708047aad092129b6cb1ad805.png";
-import imgImages from "figma:asset/a6a9fb5eb8f959fcc6c76d3217a696ffb725e28e.png";
-import imgImages11 from "figma:asset/633dc8f2ec83c4028752cbcfb6fcea367317a570.png";
-import img2931482325754928206943955453848552403829958N1 from "figma:asset/abe1e843d5401cb9b37642e58a7c68b4c392a3ac.png";
-import imgImages1 from "figma:asset/0aa862e64a803c9f15b28ac1613026f49e2f4a02.png";
-import imgThomasLogo1 from "figma:asset/4f6fd7e559531c01aac7738e1d7df543dd9569b3.png";
-import imgHotelOnce11 from "figma:asset/914f9b144fc1291b364cab53f4b76f974a1a8192.png";
-import img15951 from "figma:asset/eb29732395876af460f75a1003ef5ef78f1ca5c3.png";
-import img10120621 from "figma:asset/ed5a02e4ecfc8a4961741f9f9c98b5a92f8761b3.png";
-import imgLogoColor from "figma:asset/582e741aafa1e6e12b382e09a1f68c792788a1a6.png";
-import imgOyoRoomsLogo from "figma:asset/a1a49ba1472e22b1e135d495ceaafe716b3ea0e2.png";
-import imgLogoOfTheBankOfThailand2012Svg1 from "figma:asset/6bcb239b43eccc318b5de42b0bc8701229106cc5.png";
-import imgImages2 from "figma:asset/c074b4565634479244e1bcd0111e37100fe36a45.png";
-import imgImages12 from "figma:asset/4a527b94d283c2c858db3d849101f14357ea373c.png";
-import imgCroppedCocoTopLogo2X1 from "figma:asset/d5dbf1d243499f5a2ee3a4137e4ee05bb08174dd.png";
-import imgImages51 from "figma:asset/5c7d180920e16e00df28646d6cbd5d4332a17aca.png";
-import imgImages3 from "figma:asset/432583d27dbe0658a744df3bbdb2dc338b77499c.png";
-import imgBackground1 from "figma:asset/8b9cf7d4f337925eff561e9bed130d09cdf44818.png";
-import imgBackground2 from "figma:asset/091f801ace93294dfa35b09a88eb6855b7305d57.png";
-import imgVector from "figma:asset/6b99a2f8fa21f63827e13f5a6db1d9ed74d55b4a.png";
+import imgRectangle424 from "../assets/193ae0716c6de33d90aa240a158618ad65583eff.png";
+import imgBackground from "../assets/852860408de8254621186898a68e4c7eb55d8760.png";
+import imgTwzPublicCompanyLimitedNonVoting600 from "../assets/63b1f5ad501cbd34d07bc43c3c382675662d45d8.png";
+import imgLogoTtw from "../assets/cf4ce5499a5083f708047aad092129b6cb1ad805.png";
+import imgImages from "../assets/a6a9fb5eb8f959fcc6c76d3217a696ffb725e28e.png";
+import imgImages11 from "../assets/633dc8f2ec83c4028752cbcfb6fcea367317a570.png";
+import img2931482325754928206943955453848552403829958N1 from "../assets/abe1e843d5401cb9b37642e58a7c68b4c392a3ac.png";
+import imgImages1 from "../assets/0aa862e64a803c9f15b28ac1613026f49e2f4a02.png";
+import imgThomasLogo1 from "../assets/4f6fd7e559531c01aac7738e1d7df543dd9569b3.png";
+import imgHotelOnce11 from "../assets/914f9b144fc1291b364cab53f4b76f974a1a8192.png";
+import img15951 from "../assets/eb29732395876af460f75a1003ef5ef78f1ca5c3.png";
+import img10120621 from "../assets/ed5a02e4ecfc8a4961741f9f9c98b5a92f8761b3.png";
+import imgLogoColor from "../assets/582e741aafa1e6e12b382e09a1f68c792788a1a6.png";
+import imgOyoRoomsLogo from "../assets/a1a49ba1472e22b1e135d495ceaafe716b3ea0e2.png";
+import imgLogoOfTheBankOfThailand2012Svg1 from "../assets/6bcb239b43eccc318b5de42b0bc8701229106cc5.png";
+import imgImages2 from "../assets/c074b4565634479244e1bcd0111e37100fe36a45.png";
+import imgImages12 from "../assets/4a527b94d283c2c858db3d849101f14357ea373c.png";
+import imgCroppedCocoTopLogo2X1 from "../assets/d5dbf1d243499f5a2ee3a4137e4ee05bb08174dd.png";
+import imgImages51 from "../assets/5c7d180920e16e00df28646d6cbd5d4332a17aca.png";
+import imgImages3 from "../assets/432583d27dbe0658a744df3bbdb2dc338b77499c.png";
+import imgBackground1 from "../assets/8b9cf7d4f337925eff561e9bed130d09cdf44818.png";
+import imgBackground2 from "../assets/091f801ace93294dfa35b09a88eb6855b7305d57.png";
+import imgVector from "../assets/6b99a2f8fa21f63827e13f5a6db1d9ed74d55b4a.png";
 import imgOdooLogo1 from "../assets/odoo_logo.png";
-import imgPartnerPaysolutions2 from "figma:asset/c9cd5006c1c48dd3fd1aa64a685f41152699cf61.png";
-import imgPartnerKiu2 from "figma:asset/98cd687a2928dbd48835b161f472c0510360dd86.png";
-import imgScreenShot25680711At1723432 from "figma:asset/0ae61502c44fbafc5ba1570728d7a04486bef9ca.png";
-import imgScreenShot25680711At1723482 from "figma:asset/12a38ace56a2e7da12d994337432b969eb5ae701.png";
-import imgScreenShot25680711At172357RemovebgPreview2 from "figma:asset/7a82afd9eb85eb64fb4e2085b214c164386898ce.png";
-import imgRectangle353 from "figma:asset/61c4955997e9ed6e8ff1a334a7a6d80fe566ce15.png";
-import imgRectangle354 from "figma:asset/b5ea8129f4d415fe0acd06d21e71908257b45bb2.png";
-import imgRectangle355 from "figma:asset/6768e9e029beb67cd6e1f7d46d3f6732cc4ba910.png";
-import imgRectangle356 from "figma:asset/469d8bb1486b0b902d9ef1c1c6e9b7e5da4551d9.png";
-import imgImagePlaceholder from "figma:asset/34e5d66303e1a24493a7ba1e52f3d6996544cc8b.png";
-import imgImagePlaceholder1 from "figma:asset/f67d8728129ea6fc99e5dbc8963b90f6be3e841f.png";
-import imgImagePlaceholder2 from "figma:asset/561386bd65f14b81ac0bb8ff353f85aef864e68e.png";
-import imgImagePlaceholder3 from "figma:asset/13bbc3c799cad567f386b6ed571654e1c0f0130a.png";
-import imgEllipse68 from "figma:asset/f43f1da354f1f1eabe330582e860f8cc029e911e.png";
-import imgEllipse69 from "figma:asset/8b5092d447ff501b9173a4c875c9b2ae19757afd.png";
-import imgEllipse70 from "figma:asset/65e06e26c3fc40cd1aa69faf8545a4f729286c8b.png";
+import imgPartnerPaysolutions2 from "../assets/c9cd5006c1c48dd3fd1aa64a685f41152699cf61.png";
+import imgPartnerKiu2 from "../assets/98cd687a2928dbd48835b161f472c0510360dd86.png";
+import imgScreenShot25680711At1723432 from "../assets/0ae61502c44fbafc5ba1570728d7a04486bef9ca.png";
+import imgScreenShot25680711At1723482 from "../assets/12a38ace56a2e7da12d994337432b969eb5ae701.png";
+import imgScreenShot25680711At172357RemovebgPreview2 from "../assets/7a82afd9eb85eb64fb4e2085b214c164386898ce.png";
+import imgRectangle353 from "../assets/61c4955997e9ed6e8ff1a334a7a6d80fe566ce15.png";
+import imgRectangle354 from "../assets/b5ea8129f4d415fe0acd06d21e71908257b45bb2.png";
+import imgRectangle355 from "../assets/6768e9e029beb67cd6e1f7d46d3f6732cc4ba910.png";
+import imgRectangle356 from "../assets/469d8bb1486b0b902d9ef1c1c6e9b7e5da4551d9.png";
+import imgImagePlaceholder from "../assets/34e5d66303e1a24493a7ba1e52f3d6996544cc8b.png";
+import imgImagePlaceholder1 from "../assets/f67d8728129ea6fc99e5dbc8963b90f6be3e841f.jpg";
+import imgImagePlaceholder2 from "../assets/561386bd65f14b81ac0bb8ff353f85aef864e68e.jpg";
+import imgImagePlaceholder3 from "../assets/13bbc3c799cad567f386b6ed571654e1c0f0130a.png";
+import imgEllipse68 from "../assets/f43f1da354f1f1eabe330582e860f8cc029e911e.png";
+import imgEllipse69 from "../assets/8b5092d447ff501b9173a4c875c9b2ae19757afd.png";
+import imgEllipse70 from "../assets/65e06e26c3fc40cd1aa69faf8545a4f729286c8b.png";
 import Ellipse68 from "../assets/Ellipse 68.png";
 import Ellipse74 from "../assets/Ellipse 74.png";
 import MenuNav, { Navigation as TopNavigation } from "./meun";
-import imgImagePlaceholder4 from "figma:asset/40a7b7c2aa72b445c84e6179f4afa8c36c1c3330.png";
-import imgImagePlaceholder5 from "figma:asset/49b253b96b9760cf5eca29fb46709696b7b9332c.png";
+import imgImagePlaceholder4 from "../assets/40a7b7c2aa72b445c84e6179f4afa8c36c1c3330.jpg";
+import imgImagePlaceholder5 from "../assets/49b253b96b9760cf5eca29fb46709696b7b9332c.png";
 import { imgWireframeVector } from "./svg-9rxtm";
 
 function WireframeVector() {
+  const isMobile = useIsMobile();
+  if (isMobile) return null;
   return (
     <div className="h-[2169.89px] opacity-25 overflow-clip relative w-[2977.92px]" data-name="Wireframe Vector">
       <div className="absolute flex inset-[14.19%_28.42%_40.14%_18.14%] items-center justify-center">
@@ -166,7 +169,7 @@ function HeroSection() {
   return (
     <div className="absolute contents left-[-1039.42px] top-[-657.41px]" data-name="Hero Section">
       <div className="absolute h-[737px] left-0 opacity-25 top-0 w-[1458px]" data-name="Background">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgBackground} />
+        <img alt="" loading="lazy" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgBackground} />
       </div>
       <div className="absolute flex h-[843.161px] items-center justify-center left-[-19.5px] top-[461.72px] w-[1954.138px]">
         <div className="flex-none rotate-[357.222deg]">
@@ -223,6 +226,8 @@ function Frame2121450975() {
 }
 
 function WireframeVector1() {
+  const isMobile = useIsMobile();
+  if (isMobile) return null;
   return (
     <div className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[1139.87px_679.943px] mask-size-[864.974px_450.371px] relative size-full pointer-events-none" data-name="Wireframe Vector" style={{ maskImage: `url('${imgWireframeVector}')` }}>
       <svg className="block size-full pointer-events-none" fill="none" preserveAspectRatio="none" viewBox="0 0 2651 1057">
@@ -244,6 +249,8 @@ function WireframeVector1() {
 }
 
 function Background() {
+  const isMobile = useIsMobile();
+  if (isMobile) return null;
   return (
     <div className="absolute contents inset-[9.65%_32.29%_84.99%_7.64%]" data-name="Background">
       <div className="absolute bg-white inset-[9.65%_32.29%_84.99%_7.64%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[864.974px_450.371px] rounded-[34.644px]" data-name="Background" style={{ maskImage: `url('${imgWireframeVector}')` }} />
@@ -436,7 +443,7 @@ function AboutSection() {
       <div className="absolute bg-[#d5d9e5] bottom-[79.08%] left-0 right-[-33.33%] top-[8.71%]" data-name="Background" />
       <div className="absolute h-[684px] left-0 opacity-75 top-[733px] w-[1458px]" data-name="Background">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <img alt="" className="absolute h-[247.5%] left-0 max-w-none top-[-40.22%] w-full" src={imgBackground1} />
+          <img alt="" loading="lazy" className="absolute h-[247.5%] left-0 max-w-none top-[-40.22%] w-full" src={imgBackground1} />
         </div>
       </div>
       <Frame2121450975 />
@@ -480,7 +487,7 @@ function ProjectsSection() {
       <div className="absolute h-[2114px] left-0 opacity-25 top-[4885px] w-[1436px]" data-name="Background">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
           <div className="absolute bg-[#d9d9d9] inset-0" />
-          <img alt="" className="absolute max-w-none object-50%-50% object-cover size-full" src={imgBackground2} />
+          <img alt="" loading="lazy" className="absolute max-w-none object-50%-50% object-cover size-full" src={imgBackground2} />
           <div className="absolute bg-[#234177] inset-0" />
         </div>
       </div>
@@ -493,6 +500,8 @@ function ProjectsSection() {
 }
 
 function WireframeVector2() {
+  const isMobile = useIsMobile();
+  if (isMobile) return null;
   return (
     <div className="h-[1725px] relative w-[3604px]" data-name="Wireframe Vector">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 3604 1725">
@@ -818,9 +827,9 @@ function MaskGroup() {
   return (
     <div className="[grid-area:1_/_1] grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] ml-0 mt-0 place-items-start relative" data-name="Mask group">
       <div className="[grid-area:1_/_1] h-[531px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[382.515px_513.869px] ml-0 mt-0 relative rounded-[8px] w-[413px]" style={{ maskImage: `url('${imgRectangle353}')` }}>
-        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
-          <img alt="" className="absolute h-[98.23%] left-[-10.91%] max-w-none top-[-1.25%] w-[126.3%]" src={imgRectangle354} />
-        </div>
+      </div>
+      <div className="[grid-area:1_/_1] h-[364px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[29.932px_0px] mask-size-[382.515px_513.869px] ml-[-29.932px] mt-0 relative rounded-[8px] w-[413px]" style={{ maskImage: `url('${imgRectangle353}')` }}>
+        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[8px] size-full" src={imgRectangle354} />
       </div>
       <div className="[grid-area:1_/_1] bg-[#181818] h-[175px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[24.932px_-356.967px] mask-size-[382.515px_513.869px] ml-[-24.932px] mt-[356.967px] w-[419px]" style={{ maskImage: `url('${imgRectangle353}')` }} />
     </div>
@@ -875,9 +884,6 @@ function MaskGroup1() {
   return (
     <div className="[grid-area:1_/_1] grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] ml-0 mt-0 place-items-start relative" data-name="Mask group">
       <div className="[grid-area:1_/_1] h-[531px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[382.515px_513.869px] ml-0 mt-0 relative rounded-[8px] w-[413px]" style={{ maskImage: `url('${imgRectangle353}')` }}>
-        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
-          <img alt="" className="absolute h-[98.23%] left-[-10.91%] max-w-none top-[-1.25%] w-[126.3%]" src={imgRectangle354} />
-        </div>
       </div>
       <div className="[grid-area:1_/_1] h-[364px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[29.932px_0px] mask-size-[382.515px_513.869px] ml-[-29.932px] mt-0 relative rounded-[8px] w-[413px]" style={{ maskImage: `url('${imgRectangle353}')` }}>
         <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[8px] size-full" src={imgRectangle355} />
@@ -935,9 +941,6 @@ function MaskGroup2() {
   return (
     <div className="[grid-area:1_/_1] grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] ml-0 mt-0 place-items-start relative" data-name="Mask group">
       <div className="[grid-area:1_/_1] h-[531px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[382.515px_513.869px] ml-0 mt-0 relative rounded-[8px] w-[413px]" style={{ maskImage: `url('${imgRectangle353}')` }}>
-        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
-          <img alt="" className="absolute h-[98.23%] left-[-10.91%] max-w-none top-[-1.25%] w-[126.3%]" src={imgRectangle354} />
-        </div>
       </div>
       <div className="[grid-area:1_/_1] h-[346px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-0.137px_0px] mask-size-[382.515px_513.869px] ml-[0.137px] mt-0 relative rounded-[8px] w-[413px]" style={{ maskImage: `url('${imgRectangle353}')` }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
@@ -1060,6 +1063,7 @@ function Group2085664665() {
 
 function Group2085664659() {
   return (
+
     <div className="absolute inset-[0.49%_-11.63%_83.79%_-74.86%] pointer-events-none">
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 2686 1324">
         <g id="Group 2085664659" opacity="0.33">
@@ -1616,9 +1620,10 @@ function ServicesSection() {
 }
 
 function Frame2121450982() {
-  const visibleCount = 3;
+  const isMobile = useIsMobile();
+  const visibleCount = isMobile ? 1 : 3;
   const cardWidthPx = 350; // width of each card component
-  const gapPx = 83; // gap between cards (Tailwind gap-[83px])
+  const gapPx = isMobile ? 24 : 83; // reduce gap on mobile
 
   type TestimonialData = {
     title: string;
@@ -1702,7 +1707,7 @@ function Frame2121450982() {
   ));
 
   const baseLen = base.length;
-  const repeats = 20; // large enough to avoid frequent recenters
+  const repeats = isMobile ? 6 : 20; // reduce repeats on mobile to cut DOM size
   const totalLen = baseLen * repeats;
   const startIndex = baseLen * Math.floor(repeats / 2);
 
@@ -1892,7 +1897,7 @@ function Frame2121450990() {
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[37.016px]">
           <div className="absolute bg-[#d9d9d9] inset-0 rounded-[37.016px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[37.016px]">
-            <img alt="" className="absolute h-[136.02%] left-[-22%] max-w-none top-[-4.43%] w-[131.95%]" src={imgImagePlaceholder4} />
+            <img alt="" loading="lazy" className="absolute h-[136.02%] left-[-22%] max-w-none top-[-4.43%] w-[131.95%]" src={imgImagePlaceholder4} />
           </div>
         </div>
       </div>
@@ -1908,7 +1913,7 @@ function Item15() {
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[37.016px]">
           <div className="absolute bg-[#d9d9d9] inset-0 rounded-[37.016px]" />
           <div className="absolute inset-0 overflow-hidden rounded-[37.016px]">
-            <img alt="" className="absolute h-[128.67%] left-[-6.32%] max-w-none top-[-15.15%] w-[124.4%]" src={imgImagePlaceholder5} />
+            <img alt="" loading="lazy" className="absolute h-[128.67%] left-[-6.32%] max-w-none top-[-15.15%] w-[124.4%]" src={imgImagePlaceholder5} />
           </div>
         </div>
       </div>
@@ -2032,11 +2037,11 @@ function Frame2121451009() {
 
 function Group2085664667() {
   return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid place-items-center relative shrink-0 text-center">
+    <div className="grid-cols-[max-content] grid-rows-[max-content] grid w-full place-items-center relative shrink-0 text-center">
       <div className="[grid-area:1_/_1] font-['Poppins:Bold',_sans-serif] mt-0 not-italic relative text-[#a7c6ee] text-[75px] w-[957px]">
         <p className="leading-[1.2]">Ready to Transform Your Operations?​</p>
       </div>
-      <div className="[grid-area:1_/_1] font-['Poppins:Light_Italic',_sans-serif] italic mt-[212px] relative text-[36px] text-white w-[1031px]">
+      <div className="[grid-area:1_/_1] font-['Poppins:Light_Italic',_sans-serif] italic  mt-[40px] relative text-[36px] text-white w-[1031px]">
         <p className="leading-[normal]">{`Let's explore how our proven approach can solve your unique challenges and accelerate growth.`}</p>
       </div>
     </div>
@@ -2078,301 +2083,6 @@ function Frame2121450993() {
   );
 }
 
-function Frame353() {
-  return (
-    <div className="h-[43px] relative shrink-0 w-[179px]">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 179 43">
-        <g id="Frame 352">
-          <path d={svgPaths.p9387880} fill="var(--fill-0, white)" id="Vector" />
-          <path d={svgPaths.p2c0c8900} fill="var(--fill-0, white)" id="Vector_2" />
-          <path d={svgPaths.p3553f420} fill="var(--fill-0, white)" id="Vector_3" />
-          <path d={svgPaths.p35440600} fill="var(--fill-0, white)" id="Vector_4" />
-          <path d={svgPaths.pbc32e80} fill="var(--fill-0, white)" id="Vector_5" />
-          <path d={svgPaths.p36084600} fill="var(--fill-0, white)" id="Vector_6" />
-          <path d={svgPaths.p8fa8600} fill="var(--fill-0, white)" id="Vector_7" />
-          <path d={svgPaths.p2055a8b0} fill="var(--fill-0, white)" id="Vector_8" />
-          <path d={svgPaths.p34264a00} fill="var(--fill-0, white)" id="Vector_9" />
-          <path d={svgPaths.p3c97ca00} fill="var(--fill-0, white)" id="Vector_10" />
-          <path d={svgPaths.p13e5a3c0} fill="var(--fill-0, white)" id="Vector_11" />
-          <path d={svgPaths.p38a4ce80} fill="var(--fill-0, white)" id="Vector_12" />
-          <path d={svgPaths.p5261000} fill="var(--fill-0, white)" id="Vector_13" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function TdesignCall1() {
-  return (
-    <div className="relative shrink-0 size-[24px]" data-name="tdesign:call-1">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
-        <g id="tdesign:call-1">
-          <path d={svgPaths.p16cd1e00} fill="var(--fill-0, white)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Frame2121450997() {
-  return (
-    <div className="content-stretch flex gap-[16px] items-start relative shrink-0">
-      <TdesignCall1 />
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-75 relative shrink-0 text-[14px] text-nowrap text-white">
-        <p className="leading-[30px] whitespace-pre">089-253-9595, 02-111-8829</p>
-      </div>
-    </div>
-  );
-}
-
-function IcOutlineEmail() {
-  return (
-    <div className="relative shrink-0 size-[24px]" data-name="ic:outline-email">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
-        <g id="ic:outline-email">
-          <path d={svgPaths.p1ecc0980} fill="var(--fill-0, white)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Frame2121450998() {
-  return (
-    <div className="content-stretch flex gap-[16px] items-start relative shrink-0">
-      <IcOutlineEmail />
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-75 relative shrink-0 text-[14px] text-nowrap text-white">
-        <p className="leading-[30px] whitespace-pre">commercial@sourcecode.co.th</p>
-      </div>
-    </div>
-  );
-}
-
-function MdiPlaceOutline() {
-  return (
-    <div className="relative shrink-0 size-[25px]" data-name="mdi:place-outline">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 25 25">
-        <g id="mdi:place-outline">
-          <path d={svgPaths.p195ae580} fill="var(--fill-0, white)" id="Vector" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Frame2121450999() {
-  return (
-    <div className="content-stretch flex gap-[16px] items-start relative shrink-0">
-      <MdiPlaceOutline />
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[30px] not-italic opacity-75 relative shrink-0 text-[14px] text-nowrap text-white whitespace-pre">
-        <p className="mb-0">Sourcecode Co., Ltd.</p>
-        <p>
-          75/62–65, BKCS Group Building
-          <br aria-hidden="true" />
-          {` Soi Ramkhamhaeng 21, Ramkhamhaeng Road`}
-          <br aria-hidden="true" />
-          {` Hua Mak Subdistrict, Bang Kapi District`}
-          <br aria-hidden="true" />
-          {` Bangkok 10240, Thailand`}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function Frame2121451018() {
-  return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
-      <Frame2121450997 />
-      <Frame2121450998 />
-      <Frame2121450999 />
-    </div>
-  );
-}
-
-function FrameFooterContactInfo() {
-  return (
-    <div className="absolute content-stretch flex flex-col gap-[32px] items-start left-[75px] top-[7932px] w-[285px]">
-      <Frame353 />
-      <Frame2121451018 />
-    </div>
-  );
-}
-
-function Iso27001UkasWBg1() {
-  return (
-    <div className="h-[49px] relative shrink-0 w-[97px]" data-name="ISO 27001 UKAS W-BG 1">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 97 49">
-        <g clipPath="url(#clip0_0_755)" id="ISO 27001 UKAS W-BG 1">
-          <path d={svgPaths.p2be89200} fill="var(--fill-0, white)" id="Vector" />
-          <path d={svgPaths.p2c317280} fill="var(--fill-0, #231F20)" id="Vector_2" />
-          <path d={svgPaths.p2cf8e000} fill="var(--fill-0, white)" id="Vector_3" />
-          <path d={svgPaths.p981db00} fill="url(#paint0_radial_0_755)" id="Vector_4" />
-          <path d={svgPaths.p163e3e00} fill="url(#paint1_radial_0_755)" id="Vector_5" />
-          <path d={svgPaths.p153d9270} fill="var(--fill-0, #231F20)" id="Vector_6" />
-          <path d={svgPaths.p7617300} fill="var(--fill-0, #231F20)" id="Vector_7" />
-          <path d={svgPaths.pbd70270} fill="var(--fill-0, #231F20)" id="Vector_8" />
-          <path d={svgPaths.p1a8de500} fill="var(--fill-0, #231F20)" id="Vector_9" />
-          <path d={svgPaths.p14916f00} fill="var(--fill-0, #231F20)" id="Vector_10" />
-          <path d={svgPaths.pe85ab80} fill="var(--fill-0, #231F20)" id="Vector_11" />
-          <path d={svgPaths.p243755f0} fill="var(--fill-0, #231F20)" id="Vector_12" />
-          <path d={svgPaths.p21fc940} fill="var(--fill-0, #231F20)" id="Vector_13" />
-          <path d={svgPaths.p338a3380} fill="var(--fill-0, #231F20)" id="Vector_14" />
-          <path d={svgPaths.p12398980} fill="var(--fill-0, #231F20)" id="Vector_15" />
-          <path d={svgPaths.p2f908100} fill="var(--fill-0, #231F20)" id="Vector_16" />
-          <path d={svgPaths.p3088bf80} fill="var(--fill-0, #231F20)" id="Vector_17" />
-          <path d={svgPaths.p1f55d440} fill="var(--fill-0, #231F20)" id="Vector_18" />
-          <path d={svgPaths.p2755b300} fill="var(--fill-0, #231F20)" id="Vector_19" />
-          <path d={svgPaths.p17824300} fill="var(--fill-0, #231F20)" id="Vector_20" />
-          <path d={svgPaths.p3bcf1fc0} fill="var(--fill-0, #231F20)" id="Vector_21" />
-          <path d={svgPaths.p8b73d00} fill="var(--fill-0, #231F20)" id="Vector_22" />
-          <path d={svgPaths.p43fdf00} fill="var(--fill-0, #231F20)" id="Vector_23" />
-          <path d={svgPaths.p105a8000} fill="var(--fill-0, #231F20)" id="Vector_24" />
-          <path d={svgPaths.p1a9dba20} fill="var(--fill-0, #231F20)" id="Vector_25" />
-          <path d={svgPaths.p2c304af0} fill="var(--fill-0, #231F20)" id="Vector_26" />
-          <path d={svgPaths.p2ae88780} fill="var(--fill-0, #231F20)" id="Vector_27" />
-          <path d={svgPaths.p25cb1280} fill="var(--fill-0, #231F20)" id="Vector_28" />
-          <path d={svgPaths.p253e5200} fill="var(--fill-0, #231F20)" id="Vector_29" />
-          <path d={svgPaths.p11f04f00} fill="var(--fill-0, #231F20)" id="Vector_30" />
-          <path d={svgPaths.p2a8b5300} fill="var(--fill-0, #231F20)" id="Vector_31" />
-          <path d={svgPaths.p24988500} fill="var(--fill-0, #231F20)" id="Vector_32" />
-          <path d={svgPaths.p30f54a80} fill="var(--fill-0, #231F20)" id="Vector_33" />
-          <path d={svgPaths.p187daa00} fill="var(--fill-0, #231F20)" id="Vector_34" />
-          <path d={svgPaths.p3ebd6a00} fill="var(--fill-0, #231F20)" id="Vector_35" />
-          <path d={svgPaths.p270a8f00} fill="var(--fill-0, #231F20)" id="Vector_36" />
-          <path d={svgPaths.p3a040b80} fill="var(--fill-0, #231F20)" id="Vector_37" />
-          <path d={svgPaths.p141f4000} fill="var(--fill-0, #231F20)" id="Vector_38" />
-          <path d={svgPaths.p398ee400} fill="var(--fill-0, #231F20)" id="Vector_39" />
-          <path d={svgPaths.p332a6b00} fill="var(--fill-0, #231F20)" id="Vector_40" />
-          <path d={svgPaths.p12938f00} fill="var(--fill-0, #231F20)" id="Vector_41" />
-          <path d={svgPaths.pe7ff00} fill="var(--fill-0, #231F20)" id="Vector_42" />
-          <path d={svgPaths.p1a116e40} fill="var(--fill-0, #231F20)" id="Vector_43" />
-          <path d={svgPaths.p1ea6c480} fill="var(--fill-0, #231F20)" id="Vector_44" />
-          <path d={svgPaths.pd6e8400} fill="var(--fill-0, #231F20)" id="Vector_45" />
-          <path d={svgPaths.pd23e900} fill="var(--fill-0, #231F20)" id="Vector_46" />
-          <path d={svgPaths.p2ad329e0} fill="var(--fill-0, #231F20)" id="Vector_47" />
-          <path d={svgPaths.pb241800} fill="var(--fill-0, #231F20)" id="Vector_48" />
-        </g>
-        <defs>
-          <radialGradient cx="0" cy="0" gradientTransform="translate(24.6699 16.6539) scale(22.5105 22.3058)" gradientUnits="userSpaceOnUse" id="paint0_radial_0_755" r="1">
-            <stop offset="0.25" stopColor="#F6F6F6" />
-            <stop offset="0.43" stopColor="#F1F1F1" />
-            <stop offset="0.65" stopColor="#E3E4E4" />
-            <stop offset="0.88" stopColor="#CBCDCE" />
-            <stop offset="1" stopColor="#BCBEC0" />
-          </radialGradient>
-          <radialGradient cx="0" cy="0" gradientTransform="translate(23.5073 16.878) scale(23.7206 23.5049)" gradientUnits="userSpaceOnUse" id="paint1_radial_0_755" r="1">
-            <stop offset="0.25" stopColor="#DCDDDE" />
-            <stop offset="0.41" stopColor="#D7D8D9" />
-            <stop offset="0.6" stopColor="#C9CACC" />
-            <stop offset="0.8" stopColor="#B1B3B5" />
-            <stop offset="1" stopColor="#939598" />
-          </radialGradient>
-          <clipPath id="clip0_0_755">
-            <rect fill="white" height="49" width="97" />
-          </clipPath>
-        </defs>
-      </svg>
-    </div>
-  );
-}
-
-function Vrstva1() {
-  return (
-    <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 97 49">
-      <g id="Vrstva 1">
-        <path d="M97 0H0V49H97V0Z" fill="var(--fill-0, white)" id="Vector" />
-        <path d={svgPaths.pd6e8400} fill="var(--fill-0, #231F20)" id="Vector_2" />
-        <path d={svgPaths.pd23e900} fill="var(--fill-0, #231F20)" id="Vector_3" />
-        <path d={svgPaths.p2c317280} fill="var(--fill-0, #231F20)" id="Vector_4" />
-        <path d={svgPaths.p2cf8e000} fill="var(--fill-0, white)" id="Vector_5" />
-        <path d={svgPaths.p981db00} fill="url(#paint0_radial_0_629)" id="Vector_6" />
-        <path d={svgPaths.p163e3e00} fill="url(#paint1_radial_0_629)" id="Vector_7" />
-        <path d={svgPaths.p153d9270} fill="var(--fill-0, #231F20)" id="Vector_8" />
-        <path d={svgPaths.p7617300} fill="var(--fill-0, #231F20)" id="Vector_9" />
-        <path d={svgPaths.pbd70270} fill="var(--fill-0, #231F20)" id="Vector_10" />
-        <path d={svgPaths.p1a8de500} fill="var(--fill-0, #231F20)" id="Vector_11" />
-        <path d={svgPaths.p14916f00} fill="var(--fill-0, #231F20)" id="Vector_12" />
-        <path d={svgPaths.p1704c780} fill="var(--fill-0, #231F20)" id="Vector_13" />
-        <path d={svgPaths.p2d647ff0} fill="var(--fill-0, #231F20)" id="Vector_14" />
-        <path d={svgPaths.p3ecf8700} fill="var(--fill-0, #231F20)" id="Vector_15" />
-        <path d={svgPaths.p16722a00} fill="var(--fill-0, #231F20)" id="Vector_16" />
-        <path d={svgPaths.pdb0b80} fill="var(--fill-0, #231F20)" id="Vector_17" />
-        <path d={svgPaths.p5b8c980} fill="var(--fill-0, #231F20)" id="Vector_18" />
-        <path d={svgPaths.p162a9a00} fill="var(--fill-0, #231F20)" id="Vector_19" />
-        <path d={svgPaths.p2755b300} fill="var(--fill-0, #231F20)" id="Vector_20" />
-        <path d={svgPaths.p17824300} fill="var(--fill-0, #231F20)" id="Vector_21" />
-        <path d={svgPaths.p3bcf1fc0} fill="var(--fill-0, #231F20)" id="Vector_22" />
-        <path d={svgPaths.p8b73d00} fill="var(--fill-0, #231F20)" id="Vector_23" />
-        <path d={svgPaths.p43fdf00} fill="var(--fill-0, #231F20)" id="Vector_24" />
-        <path d={svgPaths.p105a8000} fill="var(--fill-0, #231F20)" id="Vector_25" />
-        <path d={svgPaths.p1a9dba20} fill="var(--fill-0, #231F20)" id="Vector_26" />
-        <path d={svgPaths.p2c304af0} fill="var(--fill-0, #231F20)" id="Vector_27" />
-        <path d={svgPaths.p2ae88780} fill="var(--fill-0, #231F20)" id="Vector_28" />
-        <path d={svgPaths.p25cb1280} fill="var(--fill-0, #231F20)" id="Vector_29" />
-        <path d={svgPaths.p253e5200} fill="var(--fill-0, #231F20)" id="Vector_30" />
-        <path d={svgPaths.p11f04f00} fill="var(--fill-0, #231F20)" id="Vector_31" />
-        <path d={svgPaths.p2a8b5300} fill="var(--fill-0, #231F20)" id="Vector_32" />
-        <path d={svgPaths.p24988500} fill="var(--fill-0, #231F20)" id="Vector_33" />
-        <path d={svgPaths.p30f54a80} fill="var(--fill-0, #231F20)" id="Vector_34" />
-        <path d={svgPaths.p187daa00} fill="var(--fill-0, #231F20)" id="Vector_35" />
-        <path d={svgPaths.p3ebd6a00} fill="var(--fill-0, #231F20)" id="Vector_36" />
-        <path d={svgPaths.p270a8f00} fill="var(--fill-0, #231F20)" id="Vector_37" />
-        <path d={svgPaths.p3a040b80} fill="var(--fill-0, #231F20)" id="Vector_38" />
-        <path d={svgPaths.p141f4000} fill="var(--fill-0, #231F20)" id="Vector_39" />
-        <path d={svgPaths.p398ee400} fill="var(--fill-0, #231F20)" id="Vector_40" />
-        <path d={svgPaths.p332a6b00} fill="var(--fill-0, #231F20)" id="Vector_41" />
-        <path d={svgPaths.p12938f00} fill="var(--fill-0, #231F20)" id="Vector_42" />
-        <path d={svgPaths.pe7ff00} fill="var(--fill-0, #231F20)" id="Vector_43" />
-        <path d={svgPaths.p1a116e40} fill="var(--fill-0, #231F20)" id="Vector_44" />
-        <path d={svgPaths.p1ea6c480} fill="var(--fill-0, #231F20)" id="Vector_45" />
-        <path d={svgPaths.p2ad329e0} fill="var(--fill-0, #231F20)" id="Vector_46" />
-        <path d={svgPaths.pb241800} fill="var(--fill-0, #231F20)" id="Vector_47" />
-      </g>
-      <defs>
-        <radialGradient cx="0" cy="0" gradientTransform="translate(24.6699 16.6539) scale(22.5105 22.3058)" gradientUnits="userSpaceOnUse" id="paint0_radial_0_629" r="1">
-          <stop offset="0.25" stopColor="#F6F6F6" />
-          <stop offset="0.43" stopColor="#F1F1F1" />
-          <stop offset="0.65" stopColor="#E3E4E4" />
-          <stop offset="0.88" stopColor="#CBCDCE" />
-          <stop offset="1" stopColor="#BCBEC0" />
-        </radialGradient>
-        <radialGradient cx="0" cy="0" gradientTransform="translate(23.5073 16.878) scale(23.7206 23.5049)" gradientUnits="userSpaceOnUse" id="paint1_radial_0_629" r="1">
-          <stop offset="0.25" stopColor="#DCDDDE" />
-          <stop offset="0.41" stopColor="#D7D8D9" />
-          <stop offset="0.6" stopColor="#C9CACC" />
-          <stop offset="0.8" stopColor="#B1B3B5" />
-          <stop offset="1" stopColor="#939598" />
-        </radialGradient>
-      </defs>
-    </svg>
-  );
-}
-
-function Layer2() {
-  return (
-    <div className="absolute contents inset-0" data-name="Layer 2">
-      <Vrstva1 />
-    </div>
-  );
-}
-
-function Iso9001UkasWBg1() {
-  return (
-    <div className="h-[49px] overflow-clip relative shrink-0 w-[97px]" data-name="ISO 9001 UKAS W-BG 1">
-      <Layer2 />
-    </div>
-  );
-}
-
-function FrameISO() {
-  return (
-    <div className="absolute content-stretch flex gap-[8px] items-center top-[8249px]" style={{ left: "calc(77.778% + 38px)" }}>
-      <Iso27001UkasWBg1 />
-      <Iso9001UkasWBg1 />
-    </div>
-  );
-}
 
 function ScHomepageDesktop() {
   return (
@@ -2388,7 +2098,6 @@ function ScHomepageDesktop() {
       <Group2085664659 />
       <Frame2121451009 />
       <Frame2121450993 />
-      <FrameFooterContactInfo />
       {/* footer moved to shared Footer component */}
     </div>
   );

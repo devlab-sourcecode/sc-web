@@ -1,28 +1,29 @@
+import React from "react";
 import svgPaths from "./svg-z1ekvilmxr";
 import { Footer } from "./footer";
 import { useNavigate } from "react-router-dom";
 
-import imgRectangle424 from "figma:asset/193ae0716c6de33d90aa240a158618ad65583eff.png";
-import imgWomanWheelchairDoingMaintenanceServerRoomInfrastructure1 from "figma:asset/f0643d3b8d1382269f226d33c02f94ccd2f5e8ef.png";
-import imgBackground from "figma:asset/852860408de8254621186898a68e4c7eb55d8760.png";
-import imgYoungAdultsStandingCityArmsRaisedCelebratingGeneratedByAi1 from "figma:asset/70d23b70ac0a5ca92bcffa1258eaa7e3c7cc10fe.png";
-import imgVector from "figma:asset/6b99a2f8fa21f63827e13f5a6db1d9ed74d55b4a.png";
-import imgWdcpyucred7K1 from "figma:asset/729e7c0b8491e45ec486200f6732f27733688aa3.png";
-import imgOsotspaLogoSvg1 from "figma:asset/f518701ccb505d61e23c341586d25c78eb6dbac7.png";
-import imgImages3 from "figma:asset/ec5878559e102c5eab0677bed472f57700df433a.png";
-import imgSharpLogo from "figma:asset/4656f2f11ab8e1bcd574db1d08df817abe8a3bfb.png";
-import imgC89A96Afa5815Bfe4Cb034Ee2859Eb761 from "figma:asset/114d89632c4d290006096340ae4f79710eea64ae.png";
-import imgImages22 from "figma:asset/b9bb1878917f7d4f15d7d0e0bfa6332149087c48.png";
-import imgNexgardLogoPngSeeklogo3382551 from "figma:asset/e3f4dbc52f8fabec91f5ff3a78301c7dea8be91e.png";
-import imgUntitled2 from "figma:asset/103154b2557ee6f0ad312cc7f460d8addb833a15.png";
-import imgMobileAirLiquideLogo11 from "figma:asset/89cff868f78a6d6d39f54818a26d72dd5bd19907.png";
-import imgTipco1 from "figma:asset/4cbdd9e1e9736df9f66a205d1c5701054a1caebb.png";
-import img0Fv3B4 from "figma:asset/97425544efb44dde417ec02aa6e09ad6c8dea3d5.png";
-import imgBestWesternLogoDesign2015 from "figma:asset/fba9982fa3788bb28f92ccbabb52a41d526a3fe8.png";
-import imgImagePlaceholder from "figma:asset/34e5d66303e1a24493a7ba1e52f3d6996544cc8b.png";
-import imgImagePlaceholder1 from "figma:asset/f67d8728129ea6fc99e5dbc8963b90f6be3e841f.png";
-import imgImagePlaceholder2 from "figma:asset/561386bd65f14b81ac0bb8ff353f85aef864e68e.png";
-import imgImagePlaceholder3 from "figma:asset/13bbc3c799cad567f386b6ed571654e1c0f0130a.png";
+import imgRectangle424 from "../assets/193ae0716c6de33d90aa240a158618ad65583eff.png";
+import imgWomanWheelchairDoingMaintenanceServerRoomInfrastructure1 from "../assets/f0643d3b8d1382269f226d33c02f94ccd2f5e8ef.jpg";
+import imgBackground from "../assets/852860408de8254621186898a68e4c7eb55d8760.png";
+import imgYoungAdultsStandingCityArmsRaisedCelebratingGeneratedByAi1 from "../assets/70d23b70ac0a5ca92bcffa1258eaa7e3c7cc10fe.png";
+import imgVector from "../assets/6b99a2f8fa21f63827e13f5a6db1d9ed74d55b4a.png";
+import imgWdcpyucred7K1 from "../assets/729e7c0b8491e45ec486200f6732f27733688aa3.png";
+import imgOsotspaLogoSvg1 from "../assets/f518701ccb505d61e23c341586d25c78eb6dbac7.png";
+import imgImages3 from "../assets/ec5878559e102c5eab0677bed472f57700df433a.png";
+import imgSharpLogo from "../assets/4656f2f11ab8e1bcd574db1d08df817abe8a3bfb.png";
+import imgC89A96Afa5815Bfe4Cb034Ee2859Eb761 from "../assets/114d89632c4d290006096340ae4f79710eea64ae.png";
+import imgImages22 from "../assets/b9bb1878917f7d4f15d7d0e0bfa6332149087c48.png";
+import imgNexgardLogoPngSeeklogo3382551 from "../assets/e3f4dbc52f8fabec91f5ff3a78301c7dea8be91e.png";
+import imgUntitled2 from "../assets/103154b2557ee6f0ad312cc7f460d8addb833a15.png";
+import imgMobileAirLiquideLogo11 from "../assets/89cff868f78a6d6d39f54818a26d72dd5bd19907.png";
+import imgTipco1 from "../assets/4cbdd9e1e9736df9f66a205d1c5701054a1caebb.png";
+import img0Fv3B4 from "../assets/97425544efb44dde417ec02aa6e09ad6c8dea3d5.png";
+import imgBestWesternLogoDesign2015 from "../assets/fba9982fa3788bb28f92ccbabb52a41d526a3fe8.png";
+import imgImagePlaceholder from "../assets/34e5d66303e1a24493a7ba1e52f3d6996544cc8b.png";
+import imgImagePlaceholder1 from "../assets/f67d8728129ea6fc99e5dbc8963b90f6be3e841f.jpg";
+import imgImagePlaceholder2 from "../assets/561386bd65f14b81ac0bb8ff353f85aef864e68e.jpg";
+import imgImagePlaceholder3 from "../assets/13bbc3c799cad567f386b6ed571654e1c0f0130a.png";
 import MenuNav, { Navigation as TopNavigation } from "./meun";
 
 function WireframeVector() {
@@ -333,7 +334,15 @@ function BiLine() {
 function Frame466() {
   return (
     <div className="content-stretch flex gap-[18px] items-center relative shrink-0 w-full">
-      <BiLine />
+      <a
+        href={(import.meta as any).env?.VITE_LINE_ADD_URL ?? "https://line.me/R/ti/p/@YOUR_ID"}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Add LINE"
+        className="inline-block"
+      >
+        <BiLine />
+      </a>
       <div className="h-[22px] relative shrink-0 w-[23px]" data-name="Vector">
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 23 22">
           <path d={svgPaths.p2e5a7600} fill="var(--fill-0, white)" id="Vector" />
@@ -1149,7 +1158,9 @@ function Frame2121450997() {
     <div className="content-stretch flex gap-[16px] items-start relative shrink-0">
       <TdesignCall1 />
       <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-75 relative shrink-0 text-[14px] text-nowrap text-white">
-        <p className="leading-[30px] whitespace-pre">089-253-9595, 02-111-8829</p>
+        <a href="tel:+66892539595" className="leading-[30px] whitespace-pre">089-253-9595</a>
+        <span className="leading-[30px] whitespace-pre">, </span>
+        <a href="tel:+6621118829" className="leading-[30px] whitespace-pre">02-111-8829</a>
       </div>
     </div>
   );
@@ -1172,7 +1183,7 @@ function Frame2121450998() {
     <div className="content-stretch flex gap-[16px] items-start relative shrink-0">
       <IcOutlineEmail />
       <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic opacity-75 relative shrink-0 text-[14px] text-nowrap text-white">
-        <p className="leading-[30px] whitespace-pre">commercial@sourcecode.co.th</p>
+        <a href="mailto:commercial@sourcecode.co.th" className="leading-[30px] whitespace-pre">commercial@sourcecode.co.th</a>
       </div>
     </div>
   );

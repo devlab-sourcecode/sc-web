@@ -2,16 +2,11 @@ import svgPaths from "./svg-lpde8ofs2o";
 import { Footer } from "./footer";
 import React, { createContext, useContext, useMemo, useState } from "react";
 import { toast } from "sonner";
-// @ts-ignore - figma virtual asset path is resolved by bundler
-import imgRectangle424 from "figma:asset/2ff818ecd92cfe4cd8b4220e0c6af2dec4d91b85.png";
-// @ts-ignore - figma virtual asset path is resolved by bundler
-import imgBackground from "figma:asset/852860408de8254621186898a68e4c7eb55d8760.png";
-// @ts-ignore - figma virtual asset path is resolved by bundler
-import imgImage3 from "figma:asset/3f7dd442982bed8cdbb235487ebc89687db03127.png";
-// @ts-ignore - figma virtual asset path is resolved by bundler
-import imgImage2 from "figma:asset/403877bb9ad756543babebce3aa9fcd8ad8efcd9.png";
-// @ts-ignore - figma virtual asset path is resolved by bundler
-import imgImagePlaceholder from "figma:asset/fad0cc69ce118d6709dd3595324ac258e59c2f39.png";
+import imgRectangle424 from "../assets/2ff818ecd92cfe4cd8b4220e0c6af2dec4d91b85.png";
+import imgBackground from "../assets/852860408de8254621186898a68e4c7eb55d8760.png";
+import imgImage3 from "../assets/3f7dd442982bed8cdbb235487ebc89687db03127.png";
+import imgImage2 from "../assets/403877bb9ad756543babebce3aa9fcd8ad8efcd9.png";
+import imgImagePlaceholder from "../assets/fad0cc69ce118d6709dd3595324ac258e59c2f39.png";
 // @ts-ignore - figma virtual asset path is resolved by bundler
 import imgMapImage from "../assets/map.jpg";
 import MenuNav, { Navigation as TopNavigation } from "./meun";
@@ -468,10 +463,10 @@ function Frame2121451010() {
   return (
     <div className="content-stretch flex flex-col font-['Poppins:Bold',_sans-serif] gap-[5px] items-start leading-[0] not-italic relative shrink-0 text-white w-full">
       <div className="relative shrink-0 text-[13px] w-full">
-        <p className="leading-[18.867px]">089-253-9595</p>
+        <a href="tel:+66892539595" className="leading-[18.867px]">089-253-9595</a>
       </div>
       <div className="relative shrink-0 text-[14px] w-full">
-        <p className="leading-[18.867px]">commercial@sourcecode.co.th</p>
+        <a href="mailto:commercial@sourcecode.co.th" className="leading-[18.867px]">commercial@sourcecode.co.th</a>
       </div>
     </div>
   );
@@ -481,7 +476,15 @@ function Frame573() {
   return (
     <div className="content-stretch flex gap-[24px] h-[45px] items-center relative shrink-0 w-[114px]">
       <div className="relative shrink-0 size-[45px]" data-name="image 3">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgImage3} />
+        <a
+          href={(import.meta as any).env?.VITE_LINE_ADD_URL ?? "https://line.me/R/ti/p/@YOUR_ID"}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Add LINE"
+          className="absolute inset-0 block"
+        >
+          <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgImage3} />
+        </a>
       </div>
       <div className="relative shrink-0 size-[45px]" data-name="image 2">
         <a
