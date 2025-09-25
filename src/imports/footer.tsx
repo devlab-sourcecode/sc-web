@@ -107,11 +107,18 @@ function Frame466() {
   return (
     <div className="content-stretch flex gap-[18px] items-center relative shrink-0 w-full">
       <BiLine />
-      <div className="h-[22px] relative shrink-0 w-[23px]" data-name="Vector">
+      <a
+        href="https://www.facebook.com/sourcecodeth/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Facebook"
+        className="h-[22px] relative shrink-0 w-[23px]"
+        data-name="Vector"
+      >
         <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 23 22">
           <path d={svgPaths.p2e5a7600} fill="var(--fill-0, white)" id="Vector" />
         </svg>
-      </div>
+      </a>
     </div>
   );
 }

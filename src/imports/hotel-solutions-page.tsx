@@ -38,7 +38,7 @@ import imgImagePlaceholder2 from "figma:asset/087123c95554f296ded5156b202851958b
 import imgBackground3 from "figma:asset/091f801ace93294dfa35b09a88eb6855b7305d57.png";
 import imgVector from "figma:asset/6b99a2f8fa21f63827e13f5a6db1d9ed74d55b4a.png";
 import { imgMinimalistTropicalPoolVilla2 } from "./svg-xnmc1";
-import MenuNav from "./meun";
+import MenuNav, { Navigation as TopNavigation } from "./meun";
 
 function Frame2121451031() {
   return (
@@ -69,9 +69,9 @@ function Frame507() {
 function Frame508() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
-      <div className="relative shrink-0 size-[45px]">
+      {/* <div className="relative shrink-0 size-[45px]">
         <img alt="" className="block max-w-none size-full" height="45" src={imgEllipse68} width="45" />
-      </div>
+      </div> */}
       <Frame507 />
     </div>
   );
@@ -117,9 +117,9 @@ function Frame510() {
 function Frame511() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
-      <div className="relative shrink-0 size-[45px]">
+      {/* <div className="relative shrink-0 size-[45px]">
         <img alt="" className="block max-w-none size-full" height="45" src={imgEllipse69} width="45" />
-      </div>
+      </div> */}
       <Frame510 />
     </div>
   );
@@ -165,9 +165,9 @@ function Frame512() {
 function Frame509() {
   return (
     <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
-      <div className="relative shrink-0 size-[45px]">
+      {/* <div className="relative shrink-0 size-[45px]">
         <img alt="" className="block max-w-none size-full" height="45" src={imgEllipse69} width="45" />
-      </div>
+      </div> */}
       <Frame512 />
     </div>
   );
@@ -486,13 +486,7 @@ function Frame2121450970() {
   );
 }
 
-function Navigation() {
-  return (
-    <div className="absolute contents left-[75px] top-[36px]" data-name="Navigation">
-      <Frame2121450970 />
-    </div>
-  );
-}
+ 
 
 function Frame2121450972() {
   return (
@@ -723,7 +717,7 @@ function HeroSection() {
           <WireframeVector />
         </div>
       </div>
-      <Navigation />
+      <TopNavigation Logo={Frame352} active="Our Services" />
       <CtaButton1 />
     </div>
   );

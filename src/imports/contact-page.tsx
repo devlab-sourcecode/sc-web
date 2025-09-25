@@ -14,7 +14,7 @@ import imgImage2 from "figma:asset/403877bb9ad756543babebce3aa9fcd8ad8efcd9.png"
 import imgImagePlaceholder from "figma:asset/fad0cc69ce118d6709dd3595324ac258e59c2f39.png";
 // @ts-ignore - figma virtual asset path is resolved by bundler
 import imgMapImage from "../assets/map.jpg";
-import MenuNav from "./meun";
+import MenuNav, { Navigation as TopNavigation } from "./meun";
 
 type ContactFormValues = {
   firstName: string;
@@ -373,13 +373,7 @@ function Frame2121450970() {
   );
 }
 
-function Navigation() {
-  return (
-    <div className="absolute contents left-[75px] top-[36px]" data-name="Navigation">
-      <Frame2121450970 />
-    </div>
-  );
-}
+ 
 
 function HeroSection() {
   return (
@@ -414,7 +408,7 @@ function HeroSection() {
           <WireframeVector />
         </div>
       </div>
-      <Navigation />
+      <TopNavigation Logo={Frame352} active="Contact" />
     </div>
   );
 }
@@ -490,7 +484,15 @@ function Frame573() {
         <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgImage3} />
       </div>
       <div className="relative shrink-0 size-[45px]" data-name="image 2">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgImage2} />
+        <a
+          href="https://www.facebook.com/sourcecodeth/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+          className="absolute inset-0 block"
+        >
+          <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgImage2} />
+        </a>
       </div>
     </div>
   );

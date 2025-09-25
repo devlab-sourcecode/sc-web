@@ -24,3 +24,10 @@ declare module '*.svg' {
 }
 
 
+// Allow figma:asset virtual imports emitted by design-to-code tools
+declare module 'figma:asset/*' {
+  const src: string;
+  export default src;
+}
+
+

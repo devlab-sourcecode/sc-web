@@ -215,7 +215,8 @@ function ScaledCanvas({ children, baseWidth = 1440 }: { children?: ReactNode; ba
   }, [scale, children]);
 
   return (
-    <div ref={containerRef} style={{ height: reservedHeight, position: 'relative' }}>
+    <div ref={containerRef} style={{ height: reservedHeight, position: 'relative', background: '#11112b',
+    }}>
       <div style={{ position: 'absolute', left: '50%', top: 0, transform: 'translateX(-50%)' }}>
         <div
           ref={innerRef}

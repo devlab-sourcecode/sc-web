@@ -46,7 +46,7 @@ import imgEllipse69 from "figma:asset/8b5092d447ff501b9173a4c875c9b2ae19757afd.p
 import imgEllipse70 from "figma:asset/65e06e26c3fc40cd1aa69faf8545a4f729286c8b.png";
 import Ellipse68 from "../assets/Ellipse 68.png";
 import Ellipse74 from "../assets/Ellipse 74.png";
-import MenuNav from "./meun";
+import MenuNav, { Navigation as TopNavigation } from "./meun";
 import imgImagePlaceholder4 from "figma:asset/40a7b7c2aa72b445c84e6179f4afa8c36c1c3330.png";
 import imgImagePlaceholder5 from "figma:asset/49b253b96b9760cf5eca29fb46709696b7b9332c.png";
 import { imgWireframeVector } from "./svg-9rxtm";
@@ -119,13 +119,7 @@ function Frame2121450970() {
   );
 }
 
-function Navigation() {
-  return (
-    <div className="absolute contents left-[75px] top-[36px]" data-name="Navigation">
-      <Frame2121450970 />
-    </div>
-  );
-}
+ 
 
 function Frame2121450972() {
   const navigate = useNavigate();
@@ -199,7 +193,7 @@ function HeroSection() {
           <WireframeVector />
         </div>
       </div>
-      <Navigation />
+      <TopNavigation Logo={Frame352} />
       <div className="absolute font-['Poppins:Regular',_sans-serif] leading-[30px] not-italic text-[20px] text-center text-nowrap text-white top-[427.68px] translate-x-[-50%] whitespace-pre" style={{ left: "calc(22.222% + 400.499px)" }}>
         <p className="mb-0">Cross-industry expertise and genuine partnership approach.</p>
         <p>{`We solve complex challenges others can't see.​`}</p>
@@ -388,7 +382,7 @@ function Frame2121450974() {
   };
 
   return (
-    <div className="absolute left-[136.48px] top-[875.9px] w-[838.943px]">
+    <div className="absolute top-[875.9px] w-[838.943px]" style={{ left: 125 }}>
       <div className="relative bg-white rounded-[34.644px] px-[32px] py-8 w-full overflow-hidden">
         <div className="mx-auto inline-block">
           <button aria-label="Previous logos" onClick={handlePrev} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 flex h-[38.938px] items-center justify-center w-[20.859px]">
@@ -1042,11 +1036,11 @@ function Frame2121450992() {
     <div className="absolute content-stretch flex gap-[39px] items-center left-[36px] top-[6398px]">
       <div className="flex items-center justify-center relative shrink-0">
         <div className="flex-none rotate-[180deg]">
-          <ArrowIcon />
+          {/* <ArrowIcon /> */}
         </div>
       </div>
       <Frame2121450991 />
-      <ArrowIcon1 />
+      {/* <ArrowIcon1 /> */}
     </div>
   );
 }
@@ -1157,8 +1151,15 @@ function SolarArrowRightOutline4() {
 }
 
 function Frame4646795() {
+  const navigate = useNavigate();
+  const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate("/hotel-solutions");
+  };
   return (
-    <div className="content-stretch flex gap-[3.357px] items-end justify-end relative shrink-0">
+    <div className="content-stretch flex gap-[3.357px] items-end justify-end relative shrink-0 cursor-pointer"
+    onClick={handleClick}>
       <div className="font-['Poppins:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-[12.712px] text-nowrap text-white">
         <p className="leading-[1.5] whitespace-pre">{`Learn More `}</p>
       </div>

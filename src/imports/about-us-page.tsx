@@ -1,5 +1,6 @@
 import svgPaths from "./svg-oj85ej4pat";
 import { Footer } from "./footer";
+import { useNavigate } from "react-router-dom";
 
 import imgRectangle6 from "figma:asset/2ab853886d92a995804ad543ebc676f6ebf8106c.png";
 import imgVector from "figma:asset/4cb814ffbf2e5fb6df4dd9afeca83b319b24b772.png";
@@ -19,7 +20,7 @@ import imgImagePlaceholder4 from "figma:asset/5f55a6a7be2b251a50e58a006aaf557d12
 import imgImagePlaceholder5 from "figma:asset/6d37b02821ae68f28cfe82c9bd6c0b0f799c2741.png";
 import imgImagePlaceholder6 from "figma:asset/39810ffed96a0392c666a6c826fbd64caa8d5508.png";
 import imgRectangle6Removebg1 from "figma:asset/7f0dcf95886ec7950e4b62664211ee3a9fdd4b2c.png";
-import MenuNav from "./meun";
+import MenuNav, { Navigation as TopNavigation } from "./meun";
 
 function Group2085664667() {
   return (
@@ -104,13 +105,7 @@ function Frame2121450970() {
   );
 }
 
-function Navigation() {
-  return (
-    <div className="absolute contents left-[75px] top-[36px]" data-name="Navigation">
-      <Frame2121450970 />
-    </div>
-  );
-}
+ 
 
 function HeroSection() {
   return (
@@ -139,7 +134,7 @@ function HeroSection() {
           </div>
         </div>
       </div>
-      <Navigation />
+      <TopNavigation Logo={Frame352} active="About Us" />
       <div className="absolute font-['Poppins:Regular',_sans-serif] leading-[0] not-italic text-[20px] text-right text-white top-[479px] translate-x-[-100%] w-[965px]" style={{ left: "calc(11.111% + 1072px)" }}>
         <p className="leading-[30px]">Whether you need custom software development, AI solutions, or specialized industry expertise, our team is here to understand your unique challenges and craft the perfect solution.</p>
       </div>
@@ -460,8 +455,15 @@ function Frame2121451022() {
 }
 
 function Frame2121450972() {
+  const navigate = useNavigate();
+  const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate("/contact");
+  };
   return (
-    <div className="content-stretch flex gap-[16px] items-center relative shrink-0">
+    <div className="content-stretch flex gap-[16px] items-center relative shrink-0 cursor-pointer"
+    onClick={handleClick}>
       <div className="font-['Poppins:SemiBold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
         <p className="leading-[26px] whitespace-pre">Contact Us</p>
       </div>

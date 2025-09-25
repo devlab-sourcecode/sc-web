@@ -23,7 +23,7 @@ import imgImagePlaceholder from "figma:asset/34e5d66303e1a24493a7ba1e52f3d699654
 import imgImagePlaceholder1 from "figma:asset/f67d8728129ea6fc99e5dbc8963b90f6be3e841f.png";
 import imgImagePlaceholder2 from "figma:asset/561386bd65f14b81ac0bb8ff353f85aef864e68e.png";
 import imgImagePlaceholder3 from "figma:asset/13bbc3c799cad567f386b6ed571654e1c0f0130a.png";
-import MenuNav from "./meun";
+import MenuNav, { Navigation as TopNavigation } from "./meun";
 
 function WireframeVector() {
   return (
@@ -102,13 +102,7 @@ function Frame2121450970() {
   );
 }
 
-function Navigation() {
-  return (
-    <div className="absolute contents left-[75px] top-[36px]" data-name="Navigation">
-      <Frame2121450970 />
-    </div>
-  );
-}
+ 
 
 function HeroSection() {
   return (
@@ -141,7 +135,7 @@ function HeroSection() {
           <WireframeVector />
         </div>
       </div>
-      <Navigation />
+      <TopNavigation Logo={Frame352} active="Our Services" />
       <div className="absolute font-['Poppins:Regular',_sans-serif] leading-[30px] not-italic text-[20px] text-center text-nowrap text-white top-[427.68px] translate-x-[-50%] whitespace-pre" style={{ left: "calc(22.222% + 400.502px)" }}>
         <p className="mb-0">Cross-industry expertise and genuine partnership approach.</p>
         <p>{`We solve complex challenges others can't see.​`}</p>
