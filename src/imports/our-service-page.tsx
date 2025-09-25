@@ -1,5 +1,6 @@
 import svgPaths from "./svg-z1ekvilmxr";
 import { Footer } from "./footer";
+import { useNavigate } from "react-router-dom";
 
 import imgRectangle424 from "figma:asset/193ae0716c6de33d90aa240a158618ad65583eff.png";
 import imgWomanWheelchairDoingMaintenanceServerRoomInfrastructure1 from "figma:asset/f0643d3b8d1382269f226d33c02f94ccd2f5e8ef.png";
@@ -192,7 +193,7 @@ function Frame2121450987() {
       <div className="font-['Poppins:Regular',_sans-serif] not-italic relative shrink-0 text-[14px] text-center text-white w-[564px]">
         <p className="leading-[24px]">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
       </div>
-      <CtaButton />
+      {/* <CtaButton /> */}
     </div>
   );
 }
@@ -643,7 +644,7 @@ function Frame2121450976() {
         <p className="leading-[18.867px]">Transform your operations with intelligent automation. From workflow optimization to analytics intelligence and smart hardware like AI CCTV systems — we implement AI solutions that drive efficiency across any industry.</p>
       </div>
       <Frame4646951 />
-      <Frame4646791 />
+      {/* <Frame4646791 /> */}
     </div>
   );
 }
@@ -726,8 +727,20 @@ function SolarArrowRightOutline1() {
 }
 
 function Frame4646793() {
+  const navigate = useNavigate();
+  const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate("/hotel-solutions");
+  };
   return (
-    <div className="content-stretch flex gap-[3.357px] items-end justify-end relative shrink-0">
+    <div
+      className="content-stretch flex gap-[3.357px] items-end justify-end relative shrink-0 cursor-pointer"
+      role="button"
+      tabIndex={0}
+      onClick={handleClick}
+      aria-label="Learn more about Hotel Solutions"
+    >
       <div className="font-['Poppins:Medium',_sans-serif] leading-[0] not-italic relative shrink-0 text-[12.712px] text-nowrap text-white">
         <p className="leading-[1.5] whitespace-pre">{`Learn More `}</p>
       </div>
@@ -890,7 +903,7 @@ function Frame2121450979() {
         <p className="leading-[18.867px]">{`Custom software development when SaaS isn't enough. We build proprietary solutions for security-conscious businesses, delivering source code and white-label projects that meet your exact requirements.​`}</p>
       </div>
       <Frame4646956 />
-      <Frame4646792 />
+      {/* <Frame4646792 /> */}
     </div>
   );
 }
@@ -996,7 +1009,7 @@ function Frame2121450980() {
         <p className="leading-[18.867px]">AI-powered digital telescope delivering unprecedented magnification and clarity. Perfect for tourism venues seeking to enhance sightseeing experiences and shooting ranges requiring superior long -range precision capabilities.</p>
       </div>
       <Frame4646958 />
-      <Frame4646794 />
+      {/* <Frame4646794 /> */}
     </div>
   );
 }
@@ -1028,7 +1041,7 @@ function Group2085664664() {
   return (
     <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
       <div className="[grid-area:1_/_1] bg-[#d5d9e5] h-[1223.3px] ml-0 mt-0 w-[1439px]" data-name="Rectangle" />
-      <div className="[grid-area:1_/_1] bg-[#11112b] h-[1273.7px] ml-[24px] mt-[1227px] w-[1439px]" data-name="Rectangle" />
+      <div className="[grid-area:1_/_1] bg-[#11112b] h-[1273.7px]  mt-[1227px] w-[1439px]" data-name="Rectangle" />
       <Frame4646982 />
       <div className="[grid-area:1_/_1] font-['Poppins:Bold',_sans-serif] h-[82.015px] ml-[355.5px] mt-[128.457px] not-italic relative text-[#11112b] text-[75px] text-center translate-x-[-50%] w-[327px]">
         <p className="leading-[82.432px]">Services</p>
@@ -1053,11 +1066,11 @@ function Frame2121451009() {
 
 function Group2085664661() {
   return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid place-items-start relative shrink-0 text-center">
-      <div className="[grid-area:1_/_1] font-['Poppins:Bold',_sans-serif] ml-[515.5px] mt-0 not-italic relative text-[#a7c6ee] text-[75px] translate-x-[-50%] w-[957px]">
+    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid place-items-center relative shrink-0 text-center">
+      <div className="[grid-area:1_/_1] font-['Poppins:Bold',_sans-serif] mt-0 not-italic relative text-[#a7c6ee] text-[75px] w-[957px]">
         <p className="leading-[1.2]">{` Free Consultation, Real Solutions​​`}</p>
       </div>
-      <div className="[grid-area:1_/_1] font-['Poppins:Light_Italic',_sans-serif] italic ml-[515.5px] mt-[212px] relative text-[36px] text-white translate-x-[-50%] w-[1031px]">
+      <div className="[grid-area:1_/_1] font-['Poppins:Light_Italic',_sans-serif] italic mt-[212px] relative text-[36px] text-white w-[1031px]">
         <p className="leading-[normal]">Discover how our proven approach solves your unique business challenges</p>
       </div>
     </div>

@@ -2,6 +2,7 @@ import svgPaths from "./svg-6xc7n64g64";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { getLogoSetColumns, getLogoSetNames } from "../assets/logo/sets";
 import { Footer } from "./footer";
+import { useNavigate } from "react-router-dom";
 
 import imgRectangle424 from "figma:asset/193ae0716c6de33d90aa240a158618ad65583eff.png";
 import imgBackground from "figma:asset/852860408de8254621186898a68e4c7eb55d8760.png";
@@ -26,7 +27,7 @@ import imgImages3 from "figma:asset/432583d27dbe0658a744df3bbdb2dc338b77499c.png
 import imgBackground1 from "figma:asset/8b9cf7d4f337925eff561e9bed130d09cdf44818.png";
 import imgBackground2 from "figma:asset/091f801ace93294dfa35b09a88eb6855b7305d57.png";
 import imgVector from "figma:asset/6b99a2f8fa21f63827e13f5a6db1d9ed74d55b4a.png";
-import imgOdooLogo1 from "figma:asset/34f7c09b70cd11a75769a7b2795599b91d2b34ec.png";
+import imgOdooLogo1 from "../assets/odoo_logo.png";
 import imgPartnerPaysolutions2 from "figma:asset/c9cd5006c1c48dd3fd1aa64a685f41152699cf61.png";
 import imgPartnerKiu2 from "figma:asset/98cd687a2928dbd48835b161f472c0510360dd86.png";
 import imgScreenShot25680711At1723432 from "figma:asset/0ae61502c44fbafc5ba1570728d7a04486bef9ca.png";
@@ -43,6 +44,8 @@ import imgImagePlaceholder3 from "figma:asset/13bbc3c799cad567f386b6ed571654e1c0
 import imgEllipse68 from "figma:asset/f43f1da354f1f1eabe330582e860f8cc029e911e.png";
 import imgEllipse69 from "figma:asset/8b5092d447ff501b9173a4c875c9b2ae19757afd.png";
 import imgEllipse70 from "figma:asset/65e06e26c3fc40cd1aa69faf8545a4f729286c8b.png";
+import Ellipse68 from "../assets/Ellipse 68.png";
+import Ellipse74 from "../assets/Ellipse 74.png";
 import MenuNav from "./meun";
 import imgImagePlaceholder4 from "figma:asset/40a7b7c2aa72b445c84e6179f4afa8c36c1c3330.png";
 import imgImagePlaceholder5 from "figma:asset/49b253b96b9760cf5eca29fb46709696b7b9332c.png";
@@ -125,8 +128,15 @@ function Navigation() {
 }
 
 function Frame2121450972() {
+  const navigate = useNavigate();
+  const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate("/contact");
+  };
   return (
-    <div className="content-stretch flex gap-[16px] items-center relative shrink-0">
+    <div className="content-stretch flex gap-[16px] items-center relative shrink-0 cursor-pointer"
+    onClick={handleClick}>
       <div className="font-['Poppins:SemiBold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-nowrap text-white">
         <p className="leading-[26px] whitespace-pre">{`Let's Connect​`}</p>
       </div>
@@ -220,8 +230,8 @@ function Frame2121450975() {
 
 function WireframeVector1() {
   return (
-    <div className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[1139.87px_679.943px] mask-size-[864.974px_450.371px] relative size-full" data-name="Wireframe Vector" style={{ maskImage: `url('${imgWireframeVector}')` }}>
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 2651 1057">
+    <div className="mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[1139.87px_679.943px] mask-size-[864.974px_450.371px] relative size-full pointer-events-none" data-name="Wireframe Vector" style={{ maskImage: `url('${imgWireframeVector}')` }}>
+      <svg className="block size-full pointer-events-none" fill="none" preserveAspectRatio="none" viewBox="0 0 2651 1057">
         <g id="Wireframe Vector" opacity="0.25">
           <path d={svgPaths.p1a2e4a00} id="Vector" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
           <path d={svgPaths.p230b8b80} id="Vector_2" stroke="var(--stroke-0, #949494)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.588947" />
@@ -243,8 +253,8 @@ function Background() {
   return (
     <div className="absolute contents inset-[9.65%_32.29%_84.99%_7.64%]" data-name="Background">
       <div className="absolute bg-white inset-[9.65%_32.29%_84.99%_7.64%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[0px] mask-size-[864.974px_450.371px] rounded-[34.644px]" data-name="Background" style={{ maskImage: `url('${imgWireframeVector}')` }} />
-      <div className="absolute flex inset-[1.57%_-24.42%_70.82%_-71.52%] items-center justify-center">
-        <div className="flex-none h-[1056.82px] rotate-[146.611deg] scale-y-[-100%] skew-x-[358.248deg] w-[2650.69px]">
+      <div className="absolute flex inset-[1.57%_-24.42%_70.82%_-71.52%] items-center justify-center pointer-events-none">
+        <div className="flex-none h-[1056.82px] rotate-[146.611deg] scale-y-[-100%] skew-x-[358.248deg] w-[2650.69px] pointer-events-none">
           <WireframeVector1 />
         </div>
       </div>
@@ -480,7 +490,7 @@ function ProjectsSection() {
           <div className="absolute bg-[#234177] inset-0" />
         </div>
       </div>
-      <CtaButton1 />
+      {/* <CtaButton1 /> */}
       <div className="absolute font-['Poppins:Bold',_sans-serif] leading-[0] left-[112px] not-italic text-[75px] text-white top-[4984px] w-[513px]">
         <p className="leading-[82.432px]">Case Studies</p>
       </div>
@@ -683,9 +693,9 @@ function Group2085664658() {
 
 function Frame2121451033() {
   return (
-    <div className="box-border content-stretch flex flex-col gap-[20.719px] h-[58.885px] items-start p-[11.995px] relative shrink-0 w-[197.375px]">
-      <div className="aspect-[1505/240] relative shrink-0 w-full" data-name="odoo_logo 1">
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgOdooLogo1} />
+    <div className="box-border content-stretch flex flex-col gap-[20.719px] h-[81px] items-center p-0 relative shrink-0 w-[145px]">
+      <div className="relative shrink-0 h-full w-full flex items-center justify-center" data-name="odoo_logo 1">
+        <img alt="" className="block max-h-full w-auto object-contain pointer-events-none" src={imgOdooLogo1} />
       </div>
     </div>
   );
@@ -1107,7 +1117,7 @@ function Frame2121451006() {
       <div className="font-['Poppins:Regular',_sans-serif] h-[94.833px] leading-[0] not-italic relative shrink-0 text-[#11112b] text-[14px] w-full">
         <p className="leading-[18.867px]">Transform your operations with intelligent automation. From workflow optimisation to analytics intelligence and smart hardware like AI CCTV systems — we implement AI solutions that drive efficiency across any industry.</p>
       </div>
-      <Frame4646794 />
+      {/* <Frame4646794 /> */}
     </div>
   );
 }
@@ -1291,7 +1301,7 @@ function Frame2121451011() {
       <div className="font-['Poppins:Regular',_sans-serif] h-[94.833px] leading-[0] not-italic relative shrink-0 text-[14px] text-white w-full">
         <p className="leading-[18.867px]">{`Custom software development when SaaS isn't enough. We build proprietary solutions for security-conscious businesses, delivering source code and white-label projects that meet your exact requirements.​`}</p>
       </div>
-      <Frame4646796 />
+      {/* <Frame4646796 /> */}
     </div>
   );
 }
@@ -1353,7 +1363,7 @@ function Frame2121451012() {
       <div className="font-['Poppins:Regular',_sans-serif] h-[94.833px] leading-[0] not-italic relative shrink-0 text-[#11112b] text-[14px] w-full">
         <p className="leading-[18.867px]">AI-powered digital telescope delivering unprecedented magnification and clarity. Perfect for tourism venues seeking to enhance sightseeing experiences and shooting ranges requiring superior long -range precision capabilities.</p>
       </div>
-      <Frame4646797 />
+      {/* <Frame4646797 /> */}
     </div>
   );
 }
@@ -1604,156 +1614,161 @@ function ServicesSection() {
   );
 }
 
-function Frame507() {
-  return (
-    <div className="content-stretch flex flex-col items-start leading-[0] not-italic relative shrink-0 text-[#11112b] text-nowrap">
-      <div className="font-['Poppins:Bold',_sans-serif] relative shrink-0 text-[24px]">
-        <p className="leading-[normal] text-nowrap whitespace-pre">Surakij Metanukij</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] relative shrink-0 text-[14px]">
-        <p className="leading-[30px] text-nowrap whitespace-pre">Owner at Hotel Elizabeth</p>
-      </div>
-    </div>
-  );
-}
-
-function Frame508() {
-  return (
-    <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
-      <div className="relative shrink-0 size-[45px]">
-        <img alt="" className="block max-w-none size-full" height="45" src={imgEllipse68} width="45" />
-      </div>
-      <Frame507 />
-    </div>
-  );
-}
-
-function Frame2121450978() {
-  return (
-    <div className="content-stretch flex flex-col gap-[27px] items-start relative shrink-0 w-[339px]">
-      <div className="font-['Poppins:SemiBold',_sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#11112b] text-[24px]" style={{ width: "min-content" }}>
-        <p className="leading-[30.939px]">Our hotel runs incredibly stable now—99.99% uptime with virtually no issues.</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#11112b] text-[14px]" style={{ width: "min-content" }}>
-        <p className="leading-[24px]">Guest complaints have dropped dramatically since SourceCode implemented our systems.</p>
-      </div>
-      <Frame508 />
-    </div>
-  );
-}
-
-function Frame2121450979() {
-  return (
-    <div className="content-stretch flex flex-col h-[407px] items-start justify-between relative shrink-0 w-[350px]">
-      <div className="bg-[#11112b] h-px shadow-[3.867px_7.735px_38.673px_0px_rgba(17,17,43,0.05)] shrink-0 w-full" data-name="Line" />
-      <Frame2121450978 />
-      <div className="bg-[#11112b] h-px shadow-[3.867px_7.735px_38.673px_0px_rgba(17,17,43,0.05)] shrink-0 w-full" data-name="Line" />
-    </div>
-  );
-}
-
-function Frame509() {
-  return (
-    <div className="content-stretch flex flex-col items-start leading-[0] not-italic relative shrink-0 text-[#11112b]">
-      <div className="font-['Poppins:Bold',_sans-serif] min-w-full relative shrink-0 text-[24px]" style={{ width: "min-content" }}>
-        <p className="leading-[normal]">Juldis Kludpuang</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] relative shrink-0 text-[14px] text-nowrap">
-        <p className="leading-[30px] whitespace-pre">IT Manager at Hotel Once Bangkok</p>
-      </div>
-    </div>
-  );
-}
-
-function Frame510() {
-  return (
-    <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
-      <div className="relative shrink-0 size-[45px]">
-        <img alt="" className="block max-w-none size-full" height="45" src={imgEllipse69} width="45" />
-      </div>
-      <Frame509 />
-    </div>
-  );
-}
-
-function Frame2121451013() {
-  return (
-    <div className="content-stretch flex flex-col gap-[27px] items-start relative shrink-0 w-[339px]">
-      <div className="font-['Poppins:SemiBold',_sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#11112b] text-[24px]" style={{ width: "min-content" }}>
-        <p className="leading-[30.939px]">{`Complete coverage supporting `}</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#11112b] text-[14px]" style={{ width: "min-content" }}>
-        <p className="leading-[24px]">SmartTV integration with 24-hour support team available for both Thai and international guests. Reliable service we can count on.</p>
-      </div>
-      <Frame510 />
-    </div>
-  );
-}
-
-function Frame2121450980() {
-  return (
-    <div className="content-stretch flex flex-col h-[409px] items-start justify-between relative shrink-0 w-[350px]">
-      <div className="bg-[#11112b] h-px shadow-[3.867px_7.735px_38.673px_0px_rgba(17,17,43,0.05)] shrink-0 w-full" data-name="Line" />
-      <Frame2121451013 />
-      <div className="bg-[#11112b] h-px shadow-[3.867px_7.735px_38.673px_0px_rgba(17,17,43,0.05)] shrink-0 w-full" data-name="Line" />
-    </div>
-  );
-}
-
-function Frame511() {
-  return (
-    <div className="content-stretch flex flex-col items-start relative shrink-0">
-      <div className="font-['Poppins:Bold',_sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#11112b] text-[24px]" style={{ width: "min-content" }}>
-        <p className="leading-[normal]">AIS</p>
-      </div>
-    </div>
-  );
-}
-
-function Frame512() {
-  return (
-    <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
-      <div className="relative shrink-0 size-[45px]">
-        <img alt="" className="block max-w-none size-full" height="45" src={imgEllipse70} width="45" />
-      </div>
-      <Frame511 />
-    </div>
-  );
-}
-
-function Frame2121451014() {
-  return (
-    <div className="content-stretch flex flex-col gap-[27px] items-start relative shrink-0 w-[339px]">
-      <div className="font-['Poppins:SemiBold',_sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#11112b] text-[24px]" style={{ width: "min-content" }}>
-        <p className="leading-[30.939px]">SourceCode is attentive, dedicated, and reliable.</p>
-      </div>
-      <div className="font-['Poppins:Regular',_sans-serif] leading-[24px] min-w-full not-italic relative shrink-0 text-[#11112b] text-[14px]" style={{ width: "min-content" }}>
-        <p className="mb-0">The software is quality,</p>
-        <p>and whenever we give them a brief, they come back with great solutions.</p>
-      </div>
-      <Frame512 />
-    </div>
-  );
-}
-
-function Frame2121450981() {
-  return (
-    <div className="content-stretch flex flex-col h-[407px] items-start justify-between relative shrink-0 w-[350px]">
-      <div className="bg-[#11112b] h-px shadow-[3.867px_7.735px_38.673px_0px_rgba(17,17,43,0.05)] shrink-0 w-full" data-name="Line" />
-      <Frame2121451014 />
-      <div className="bg-[#11112b] h-px shadow-[3.867px_7.735px_38.673px_0px_rgba(17,17,43,0.05)] shrink-0 w-full" data-name="Line" />
-    </div>
-  );
-}
-
 function Frame2121450982() {
+  const visibleCount = 3;
+  const cardWidthPx = 350; // width of each card component
+  const gapPx = 83; // gap between cards (Tailwind gap-[83px])
+
+  type TestimonialData = {
+    title: string;
+    description: string;
+    avatarSrc: string;
+    name: string;
+    role?: string;
+  };
+
+  const testimonialsData: TestimonialData[] = [
+    {
+      title: "Our hotel runs incredibly stable now—99.99% uptime with virtually no issues.",
+      description: "Guest complaints have dropped dramatically since SourceCode implemented our systems.",
+      avatarSrc: imgEllipse68,
+      name: "Surakij\u00A0Metanukij",
+      role: "Owner at Hotel Elizabeth",
+    },
+    {
+      title: "Complete coverage supporting\u00A0",
+      description:
+        "SmartTV integration with 24-hour support team available for both Thai and international guests. Reliable service we can count on.",
+      avatarSrc: imgEllipse69,
+      name: "Juldis\u00A0Kludpuang",
+      role: "IT Manager at Hotel Once Bangkok",
+    },
+    {
+      title: "SourceCode\u00A0is attentive, dedicated, and reliable.",
+      description:
+        "The software is quality, and whenever we give them a brief, they come back with great solutions.",
+      avatarSrc: imgEllipse70,
+      name: "AIS",
+    },
+    {
+      title: "Service is quick, and the project moves along faster than the planned schedule.",
+      description:
+        "",
+      avatarSrc: Ellipse68,
+      name: "DGA",
+    },
+    {
+      title: "The team is committed to teaching and everyone is very kind.",
+      description:
+        "",
+      avatarSrc: Ellipse74,
+      name: "TG",
+    },
+  ];
+
+  const TestimonialCard: React.FC<{ data: TestimonialData }> = ({ data }) => (
+    <div className="content-stretch flex flex-col h-[407px] items-start justify-between relative shrink-0 w-[350px]">
+      <div className="bg-[#11112b] h-px shadow-[3.867px_7.735px_38.673px_0px_rgba(17,17,43,0.05)] shrink-0 w-full" data-name="Line" />
+      <div className="content-stretch flex flex-col gap-[27px] items-start relative shrink-0 w-[339px]">
+        <div className="font-['Poppins:SemiBold',_sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#11112b] text-[24px]" style={{ width: "min-content" }}>
+          <p className="leading-[30.939px]">{data.title}</p>
+        </div>
+        <div className="font-['Poppins:Regular',_sans-serif] leading-[0] min-w-full not-italic relative shrink-0 text-[#11112b] text-[14px]" style={{ width: "min-content" }}>
+          <p className="leading-[24px]">{data.description}</p>
+        </div>
+        <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
+          <div className="relative shrink-0 size-[45px]">
+            <img alt="" className="block max-w-none size-full" height="45" src={data.avatarSrc} width="45" />
+          </div>
+          <div className="content-stretch flex flex-col items-start leading-[0] not-italic relative shrink-0 text-[#11112b]">
+            <div className="font-['Poppins:Bold',_sans-serif] min-w-full relative shrink-0 text-[24px]" style={{ width: "min-content" }}>
+              <p className="leading-[normal]">{data.name}</p>
+            </div>
+            {data.role ? (
+              <div className="font-['Poppins:Regular',_sans-serif] relative shrink-0 text-[14px] text-nowrap">
+                <p className="leading-[30px] whitespace-pre">{data.role}</p>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </div>
+      <div className="bg-[#11112b] h-px shadow-[3.867px_7.735px_38.673px_0px_rgba(17,17,43,0.05)] shrink-0 w-full" data-name="Line" />
+    </div>
+  );
+
+  const base: React.ReactNode[] = testimonialsData.map((t, idx) => (
+    <TestimonialCard key={`testimonial-${idx}`} data={t} />
+  ));
+
+  const baseLen = base.length;
+  const repeats = 20; // large enough to avoid frequent recenters
+  const totalLen = baseLen * repeats;
+  const startIndex = baseLen * Math.floor(repeats / 2);
+
+  const [slideIndex, setSlideIndex] = useState(startIndex);
+  const [isAnimating, setIsAnimating] = useState(true);
+
+  const handlePrev = () => {
+    setIsAnimating(true);
+    setSlideIndex((v) => v - 1);
+  };
+
+  const handleNext = () => {
+    setIsAnimating(true);
+    setSlideIndex((v) => v + 1);
+  };
+
+  const translateX = -(slideIndex * (cardWidthPx + gapPx));
+
+  const normalizeIndex = (i: number) => {
+    const diff = i - startIndex;
+    const mod = ((diff % baseLen) + baseLen) % baseLen;
+    return startIndex + mod;
+  };
+
+  const handleTransitionEnd = () => {
+    const buffer = baseLen; // when near edges, recenter
+    if (slideIndex <= buffer || slideIndex >= totalLen - buffer) {
+      const normalized = normalizeIndex(slideIndex);
+      if (normalized !== slideIndex) {
+        setIsAnimating(false);
+        setSlideIndex(normalized);
+        requestAnimationFrame(() => setIsAnimating(true));
+      }
+    }
+  };
+
   return (
-    <div className="[grid-area:1_/_1] box-border content-stretch flex gap-[83px] items-center ml-[111px] mt-[322px] relative w-[1218px] overflow-x-auto">
-      <Frame2121450979 />
-      <Frame2121450980 />
-      <Frame2121450981 />
-      <Frame2121450979 />
-      <Frame2121450980 />
+    <div className="[grid-area:1_/_1] box-border relative ml-[111px] mt-[322px] w-[1218px]">
+      <button aria-label="Previous testimonials" onClick={handlePrev} className="absolute top-1/2 -translate-y-1/2 z-10 flex items-center justify-center" style={{ left: "-58px" }}>
+        <div className="flex-none rotate-[180deg]">
+          <ArrowIcon />
+        </div>
+      </button>
+
+      <div className="overflow-hidden">
+        <div
+          className="flex gap-[83px]"
+          style={{
+            transform: `translateX(${translateX}px)`,
+            transition: isAnimating ? "transform 700ms cubic-bezier(0.22, 1, 0.36, 1)" : "none",
+            willChange: "transform",
+          }}
+          onTransitionEnd={handleTransitionEnd}
+        >
+          {Array.from({ length: repeats }).flatMap((_, r) =>
+            base.map((component, idx) => (
+              <div key={`rep-${r}-${idx}`} className="shrink-0" style={{ width: `${cardWidthPx}px` }}>
+                {component}
+              </div>
+            )),
+          )}
+        </div>
+      </div>
+
+      <button aria-label="Next testimonials" onClick={handleNext} className="absolute top-1/2 -translate-y-1/2 z-10 flex items-center justify-center" style={{ right: "-48px" }}>
+        <ArrowIcon1 />
+      </button>
     </div>
   );
 }
@@ -1864,7 +1879,7 @@ function Frame2121450988() {
         <p className="mb-0">{`After 30 years serving Bangkok's Saphan Kwai district, this beloved hotel faced connectivity issues that threatened their reputation for quality service.`}</p>
         <p>{` SourceCode delivered a complete network overhaul that matched their classic hospitality standards. The result? Dramatic reduction in guest complaints and significantly improved satisfaction scores. Discover how we transformed their infrastructure without disrupting their timeless charm.`}</p>
       </div>
-      <Frame4646798 />
+      {/* <Frame4646798 /> */}
     </div>
   );
 }
@@ -1962,7 +1977,7 @@ function Frame2121450987() {
       <div className="font-['Poppins:Regular',_sans-serif] leading-[0] not-italic relative shrink-0 text-[14px] text-white w-[564px]">
         <p className="leading-[24px]">This specialized medical compound provider was drowning in fragmented data across spreadsheets and legacy systems. Critical formulation details, inventory tracking, and patient records existed in silos, creating dangerous gaps in their workflow. Our custom Master Data Management platform unified their entire operation, establishing bulletproof traceability and eliminating the manual errors that put patients at risk.​</p>
       </div>
-      <Frame4646799 />
+      {/* <Frame4646799 /> */}
     </div>
   );
 }
@@ -1995,7 +2010,7 @@ function Group2085664666() {
           <img alt="" className="absolute max-w-none object-50%-50% object-cover size-full" src={imgBackground2} />
         </div>
       </div>
-      <CtaButton2 />
+      {/* <CtaButton2 /> */}
       <div className="[grid-area:1_/_1] font-['Poppins:Bold',_sans-serif] leading-[0] ml-[112px] mt-[99px] not-italic relative text-[75px] text-white w-[513px]">
         <p className="leading-[82.432px]">Case Studies</p>
       </div>
@@ -2016,11 +2031,11 @@ function Frame2121451009() {
 
 function Group2085664667() {
   return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid place-items-start relative shrink-0 text-center">
-      <div className="[grid-area:1_/_1] font-['Poppins:Bold',_sans-serif] ml-[515.5px] mt-0 not-italic relative text-[#a7c6ee] text-[75px] translate-x-[-50%] w-[957px]">
+    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid place-items-center relative shrink-0 text-center">
+      <div className="[grid-area:1_/_1] font-['Poppins:Bold',_sans-serif] mt-0 not-italic relative text-[#a7c6ee] text-[75px] w-[957px]">
         <p className="leading-[1.2]">Ready to Transform Your Operations?​</p>
       </div>
-      <div className="[grid-area:1_/_1] font-['Poppins:Light_Italic',_sans-serif] italic ml-[515.5px] mt-[212px] relative text-[36px] text-white translate-x-[-50%] w-[1031px]">
+      <div className="[grid-area:1_/_1] font-['Poppins:Light_Italic',_sans-serif] italic mt-[212px] relative text-[36px] text-white w-[1031px]">
         <p className="leading-[normal]">{`Let's explore how our proven approach can solve your unique challenges and accelerate growth.`}</p>
       </div>
     </div>
@@ -2028,8 +2043,14 @@ function Group2085664667() {
 }
 
 function CtaButton3() {
+  const navigate = useNavigate();
+  const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate("/contact");
+  };
   return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid place-items-start relative shrink-0" data-name="CTA Button">
+    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid place-items-start relative shrink-0 cursor-pointer" data-name="CTA Button" onClick={handleClick}>
       <div className="[grid-area:1_/_1] h-[80px] ml-0 mt-0 relative rounded-[15px] w-[316px]" data-name="Rectangle">
         <div aria-hidden="true" className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[15px]" />
       </div>

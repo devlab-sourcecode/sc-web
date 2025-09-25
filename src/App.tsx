@@ -30,10 +30,10 @@ function NavigationWrapper({ children }: { children?: ReactNode }) {
     // Handle Our Services navigation -> go to Hotel Solutions per requirement
     if (text === "Our Services") {
       e.preventDefault();
-      if (location.pathname === "/hotel-solutions") {
+      if (location.pathname === "/our-services") {
         window.scrollTo(0, 0);
       } else {
-        navigate("/hotel-solutions");
+        navigate("/our-services");
       }
       return;
     }
@@ -145,7 +145,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePageLink />} />
         <Route path="/contact" element={<ContactPageLink />} />
-        <Route path="/services" element={<ServicesPageLink />} />
+        <Route path="/our-services" element={<ServicesPageLink />} />
         <Route path="/hotel-solutions" element={<HotelSolutionsPageLink />} />
         <Route path="/about-us" element={<AboutUsPageLink />} />
 

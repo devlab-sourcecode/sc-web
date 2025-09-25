@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import HoverMenu from "./hover-menu";
+import HoverMenu from "./hover-menu.tsx";
 
 type MenuNavProps = {
   active?: "Our Services" | "Case Studies" | "News/Blog" | "About Us" | "Contact";
@@ -8,10 +7,8 @@ type MenuNavProps = {
 
 export function MenuNav({ active }: MenuNavProps) {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-  const triggerRef = useRef<HTMLDivElement | null>(null);
-  const [leftOffsetPx, setLeftOffsetPx] = useState(0);
-  const [portalTopPx, setPortalTopPx] = useState(0);
   const hideTimeoutRef = useRef<number | null>(null);
+  const FORCE_OPEN = false; // ปิดโหมดดีบัก กลับไปใช้ hover
 
   const openMenu = () => {
     if (hideTimeoutRef.current !== null) {
@@ -31,24 +28,7 @@ export function MenuNav({ active }: MenuNavProps) {
     }, 150);
   };
 
-  useEffect(() => {
-    if (!isServicesOpen) return;
-    const rect = triggerRef.current?.getBoundingClientRect();
-    setLeftOffsetPx(rect ? Math.round(rect.left) : 0);
-    setPortalTopPx(rect ? Math.round(rect.bottom + window.scrollY) : 0);
-
-    const handleReposition = () => {
-      const r = triggerRef.current?.getBoundingClientRect();
-      setLeftOffsetPx(r ? Math.round(r.left) : 0);
-      setPortalTopPx(r ? Math.round(r.bottom + window.scrollY) : 0);
-    };
-    window.addEventListener("scroll", handleReposition, { passive: true });
-    window.addEventListener("resize", handleReposition);
-    return () => {
-      window.removeEventListener("scroll", handleReposition);
-      window.removeEventListener("resize", handleReposition);
-    };
-  }, [isServicesOpen]);
+  // no positioning effect needed for absolute overlay
 
   useEffect(() => {
     return () => {
@@ -66,9 +46,8 @@ export function MenuNav({ active }: MenuNavProps) {
     <div className="content-stretch flex gap-[44px] items-center justify-end relative shrink-0 w-[899.817px]">
       <div
         className="content-stretch flex items-center justify-between relative shrink-0 w-[122px]"
-        onMouseEnter={openMenu}
-        onMouseLeave={scheduleCloseMenu}
-        ref={triggerRef}
+        // onMouseEnter={openMenu}
+        // onMouseLeave={scheduleCloseMenu}
       >
         <div className={itemClass("Our Services")}>
           <p className="leading-[26px] whitespace-pre">Our Services</p>
@@ -78,19 +57,7 @@ export function MenuNav({ active }: MenuNavProps) {
             <path d="M1 1.5L7 6.5L13 1.5" fill="white" />
           </svg>
         </div>
-        {isServicesOpen && typeof document !== "undefined"
-          ? createPortal(
-              <div
-                className="fixed z-[99999] w-[1440px] h-[891px] pointer-events-auto"
-                style={{ left: `0px`, top: `${portalTopPx}px` }}
-                onMouseEnter={openMenu}
-                onMouseLeave={scheduleCloseMenu}
-              >
-                <HoverMenu />
-              </div>,
-              document.body
-            )
-          : null}
+
       </div>
       {/* <div className={itemClass("Case Studies")}>
         <p className="leading-[26px] whitespace-pre">Case Studies</p>
@@ -104,6 +71,16 @@ export function MenuNav({ active }: MenuNavProps) {
       <div className={itemClass("Contact")}>
         <p className="leading-[26px] whitespace-pre">Contact</p>
       </div>
+
+      {(FORCE_OPEN || isServicesOpen) && (
+          <div
+            className="absolute left-0 top-full z-[2147483647] w-[1440px] h-[891px] pointer-events-auto"
+            onMouseEnter={openMenu}
+            onMouseLeave={FORCE_OPEN ? undefined : scheduleCloseMenu}
+          >
+            <HoverMenu />
+          </div>
+        )}
     </div>
   );
 }

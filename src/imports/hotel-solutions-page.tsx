@@ -199,12 +199,10 @@ function Frame2121450981() {
 
 function Frame2121450982() {
   return (
-    <div className="absolute content-stretch flex gap-[83px] items-center left-[111px] top-[6269px] w-[1218px] overflow-x-auto">
+    <div className="absolute content-stretch flex gap-[83px] items-center left-[111px] top-[6269px] w-[1218px]">
       <Frame2121450979 />
       <Frame2121450980 />
       <Frame2121450981 />
-      <Frame2121450979 />
-      <Frame2121450980 />
     </div>
   );
 }
