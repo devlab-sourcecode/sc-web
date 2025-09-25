@@ -153,7 +153,7 @@ function Frame2121450972() {
 
 function Frame2121450973() {
   return (
-    <div className="absolute box-border content-stretch flex flex-col gap-[10px] h-[80px] items-center px-[53px] py-[27px] rounded-[15px] top-[582px] w-[256px]" style={{ left: "calc(33.333% + 112px)" }}>
+    <div className="absolute box-border content-stretch flex flex-col gap-[10px] h-[80px] items-center px-[53px] py-[27px] rounded-[15px] top-[582px] w-[256px] cursor-pointer" style={{ left: "calc(33.333% + 112px)" }}>
       <div aria-hidden="true" className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[15px]" />
       <Frame2121450972 />
     </div>

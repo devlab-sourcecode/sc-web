@@ -5756,6 +5756,11 @@ html {
   opacity: .8;
 }
 
+/* Ensure cursor-pointer utility exists even if Tailwind build is static */
+.cursor-pointer {
+  cursor: pointer;
+}
+
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;

@@ -13,7 +13,7 @@ import imgImage2 from "figma:asset/403877bb9ad756543babebce3aa9fcd8ad8efcd9.png"
 // @ts-ignore - figma virtual asset path is resolved by bundler
 import imgImagePlaceholder from "figma:asset/fad0cc69ce118d6709dd3595324ac258e59c2f39.png";
 // @ts-ignore - figma virtual asset path is resolved by bundler
-import imgMapImage from "figma:asset/3a8b8a7d2dac090ff0ac2aaf5760732acab67c7f.png";
+import imgMapImage from "../assets/map.jpg";
 import MenuNav from "./meun";
 
 type ContactFormValues = {
@@ -920,17 +920,14 @@ function LocationFormSection() {
       <div className="absolute inset-[32.55%_31.39%_51.49%_7.92%] rounded-[25px]" data-name="Map Image">
         <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[25px] size-full" src={imgMapImage} />
       </div>
-      <div className="absolute inset-[39.27%_60.38%_59.76%_38.23%]" data-name="Vector">
-        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 30">
-          <g id="Vector">
-            <path d={svgPaths.p28378080} fill="var(--fill-0, #EA4335)" />
-            <path d={svgPaths.p36a72700} fill="var(--fill-0, #EA4335)" />
-            <path d={svgPaths.p37bd7300} fill="var(--fill-0, #EA4335)" />
-            <path d={svgPaths.p13e65e80} fill="var(--fill-0, #EA4335)" />
-            <path d={svgPaths.p1257bd00} fill="var(--fill-0, #EA4335)" />
-          </g>
-        </svg>
-      </div>
+      <a
+        href="https://maps.app.goo.gl/yezbJLEZFFFA7a8Z7"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open location in Google Maps"
+        className="absolute inset-[32.55%_31.39%_51.49%_7.92%] rounded-[25px]"
+        style={{ zIndex: 20 }}
+      />
       <div className="absolute backdrop-blur-[9.75px] backdrop-filter bg-gradient-to-b from-[rgba(255,255,255,0.3)] h-[164px] left-[139.79px] rounded-[20.924px] to-[rgba(255,255,255,0.1)] top-[1309px] w-[565.473px]" data-name="Rectangle">
         <div aria-hidden="true" className="absolute border-[0.837px] border-[rgba(255,255,255,0.2)] border-solid inset-0 pointer-events-none rounded-[20.924px]" />
       </div>
